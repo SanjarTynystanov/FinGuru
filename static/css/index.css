@@ -60,7 +60,258 @@ body {
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
 }
+/* Existing styles assumed to be in index.css, extending with responsive navigation styles */
 
+/* Hamburger menu */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: #333;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    background: #333;
+    transition: transform 0.3s;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* Main navigation */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #007bff;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    color: #007bff;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a:focus {
+    background: #f8f9fa;
+    color: #007bff;
+}
+
+.dropdown[aria-expanded="true"] .dropdown-menu {
+    display: block;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .nav-link,
+    .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #f8f9fa;
+        padding-left: 20px;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .language-toggle {
+        display: flex;
+        gap: 5px;
+    }
+
+    .lang-btn {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .theme-toggle {
+        padding: 5px;
+    }
+
+    .btn-login,
+    .btn-logout {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        max-width: 100px;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-profile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .user-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+}
+
+/* Dark theme adjustments */
+body.dark-theme .main-nav {
+    background: #222;
+}
+
+body.dark-theme .nav-link,
+body.dark-theme .dropdown-toggle {
+    color: #fff;
+}
+
+body.dark-theme .nav-link:hover,
+body.dark-theme .nav-link:focus,
+body.dark-theme .dropdown-toggle:hover,
+body.dark-theme .dropdown-toggle:focus {
+    color: #4dabf7;
+}
+
+body.dark-theme .dropdown-menu {
+    background: #333;
+}
+
+body.dark-theme .dropdown-menu a {
+    color: #fff;
+}
+
+body.dark-theme .dropdown-menu a:hover,
+body.dark-theme .dropdown-menu a:focus {
+    background: #444;
+    color: #4dabf7;
+}
+
+body.dark-theme .hamburger,
+body.dark-theme .hamburger::before,
+body.dark-theme .hamburger::after {
+    background: #fff;
+}
 .container {
     width: 100%;
     max-width: 1200px;
