@@ -1,0 +1,269 @@
+/* Стили для уведомлений */
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    color: white;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    animation: slideIn 0.5s ease forwards;
+}
+
+.alert-success {
+    background-color: #48bb78;
+}
+
+.alert-error {
+    background-color: #f56565;
+}
+
+.alert-info {
+    background-color: #63b3ed;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Основные стили для секции */
+.legal-section {
+    padding: 80px 0;
+    background-color: var(--bg-color);
+    min-height: 70vh;
+}
+
+.terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.terms-container h1 {
+    font-size: 2.5em;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.terms-container > p {
+    font-size: 1.1em;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.terms-section {
+    margin-bottom: 40px;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.terms-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.terms-section h2 {
+    font-size: 1.8em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.terms-section p {
+    font-size: 1em;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+/* Стили для гамбургер-меню */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: var(--transition);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu .nav-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-menu .nav-link i {
+    margin-right: 8px;
+}
+
+.nav-menu .nav-link:hover,
+.nav-menu .nav-link.active {
+    color: var(--primary-color);
+}
+
+/* Выпадающее меню */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    margin-left: 5px;
+    font-size: 0.8em;
+    transition: var(--transition);
+}
+
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--border-radius);
+    min-width: 200px;
+    z-index: 1000;
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .legal-section {
+        padding: 50px 0;
+    }
+
+    .terms-container h1 {
+        font-size: 2em;
+    }
+
+    .terms-section h2 {
+        font-size: 1.5em;
+    }
+
+    .terms-section {
+        padding: 20px;
+    }
+
+    .alert {
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--card-bg);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: var(--shadow-md);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background-color: transparent;
+        padding-left: 20px;
+    }
+
+    .dropdown-menu a {
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .terms-container h1 {
+        font-size: 1.8em;
+    }
+
+    .terms-section h2 {
+        font-size: 1.3em;
+    }
+
+    .terms-section p {
+        font-size: 0.95em;
+    }
+}

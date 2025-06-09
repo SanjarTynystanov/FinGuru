@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinGuru Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css"> <link rel="stylesheet" href="static/css/index.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="logo">
+                    <img src="/static/images/myImage-Photoroom.png" alt="finGuru Logo" class="logo-img">
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="sidebar-nav-link active"><i class="fas fa-chart-pie"></i><span>Обзор</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-exchange-alt"></i><span>Транзакции</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-piggy-bank"></i><span>Бюджет</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-chart-line"></i><span>Аналитика</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-coins"></i><span>Счета</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-file-invoice"></i><span>Отчеты</span></a></li>
+                    <li><a href="#" class="sidebar-nav-link"><i class="fas fa-cog"></i><span>Настройки</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-nav-link"><i class="fas fa-question-circle"></i><span>Помощь</span></a>
+                <a href="/index" class="sidebar-nav-link logout-btn"><i class="fas fa-sign-out-alt"></i><span>Выйти</span></a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <header class="dashboard-header">
+                <div class="dashboard-header-left">
+                    <h1>Ваш Дашборд</h1>
+                    </div>
+                <div class="dashboard-header-right">
+                    <button class="add-transaction-btn"><i class="fas fa-plus"></i> Добавить транзакцию</button>
+                    <div class="user-profile-dash">
+                        <div class="user-avatar-dash">JD</div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-body">
+                <section class="dashboard-overview">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <h3>Общий баланс</h3>
+                            <p class="stat-value">$12,345.67</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
+                            <h3>Доход за месяц</h3>
+                            <p class="stat-value text-success">$2,500.00</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+                            <h3>Расходы за месяц</h3>
+                            <p class="stat-value text-danger">$1,200.00</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
+                            <h3>Цель накоплений</h3>
+                            <p class="stat-value">$5,000.00 <span class="text-info">(50% достигнуто)</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-charts-section">
+                    <div class="chart-card">
+                        <h3>Динамика баланса</h3>
+                        <img src="https://via.placeholder.com/600x300?text=Balance+Chart" alt="Balance Chart" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="chart-card">
+                        <h3>Распределение расходов</h3>
+                        <img src="https://via.placeholder.com/600x300?text=Expenses+Pie+Chart" alt="Expenses Pie Chart" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                </section>
+
+                <section class="recent-transactions">
+                    <h2>Последние транзакции</h2>
+                    <div class="transactions-list">
+                        <div class="transaction-item">
+                            <div class="transaction-icon income"><i class="fas fa-plus-circle"></i></div>
+                            <div class="transaction-details">
+                                <span class="transaction-name">Фриланс проект</span>
+                                <span class="transaction-category">Доход</span>
+                            </div>
+                            <span class="transaction-amount text-success">+$750.00</span>
+                            <span class="transaction-date">Май 29, 2025</span>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-icon expense"><i class="fas fa-minus-circle"></i></div>
+                            <div class="transaction-details">
+                                <span class="transaction-name">Продукты - Супермаркет</span>
+                                <span class="transaction-category">Еда</span>
+                            </div>
+                            <span class="transaction-amount text-danger">-$85.50</span>
+                            <span class="transaction-date">Май 28, 2025</span>
+                        </div>
+                        </div>
+                    <a href="#" class="btn-primary view-all-btn">Все транзакции <i class="fas fa-arrow-right"></i></a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script> </body>
+</html>

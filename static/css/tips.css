@@ -1,0 +1,283 @@
+/* tips.css */
+
+/* --- Базовые переменные для светлой темы --- */
+:root {
+    /* Основные цвета */
+    --primary-color: #6c63ff; /* Основной цвет (фиолетовый) */
+    --primary-dark: #4d44db;  /* Более темный оттенок основного */
+    --primary-light: #8e88ff; /* Более светлый оттенок основного */
+    --text-color: #2d3748;    /* Основной текст */
+    --text-light: #4a5568;    /* Светлый текст (для описаний) */
+    --bg-color: #ffffff;      /* Основной фон страницы */
+    --card-bg: #f7fafc;       /* Фон для карточек и блоков */
+    --border-color: #e2e8f0;  /* Цвет границ */
+
+    /* Альтернативные цвета для светлой темы */
+    --green-light: #48bb78;   /* Светлый зелёный */
+    --red-light: #f56565;     /* Светлый красный */
+    --blue-light: #4299e1;    /* Светлый синий */
+
+    /* Тени */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    /* Прочее */
+    --transition: all 0.3s ease;
+    --border-radius: 12px; /* Увеличенный радиус скругления */
+}
+
+/* --- Темная тема --- */
+.dark-theme { 
+    /* Основные цвета */
+    --primary-color: #7b73ff;
+    --primary-dark: #6a64e2;
+    --primary-light: #9c96ff;
+    --text-color: #f7fafc;
+    --text-light: #cbd5e0;
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --border-color: #4a5568;
+
+    /* Альтернативные цвета для тёмной темы */
+    --green-light: #38a169;   /* Тёмный зелёный */
+    --red-light: #e53e3e;     /* Тёмный красный */
+    --blue-light: #3182ce;    /* Тёмный синий */
+
+    /* Тени */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+/* Стили только для main */
+.main-content {
+    max-width: 1100px; /* Просторная ширина */
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.main-content h1 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.main-content h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-light);
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+.intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-light);
+}
+
+.tips-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tip-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 5px solid transparent; /* Подготовка для акцента */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.tip-card:nth-child(1) { border-left-color: var(--blue-light); }
+.tip-card:nth-child(2) { border-left-color: var(--green-light); }
+.tip-card:nth-child(3) { border-left-color: var(--red-light); }
+.tip-card:nth-child(4) { border-left-color: var(--primary-color); }
+.tip-card:nth-child(5) { border-left-color: var(--blue-light); }
+.tip-card:nth-child(6) { border-left-color: var(--green-light); }
+
+.tip-icon {
+    font-size: 28px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.tip-card:hover .tip-icon {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.tip-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.tip-card p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.video-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.video-section h2 {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Соотношение 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.video-wrapper:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 15px;
+    }
+
+    .main-content h1 {
+        font-size: 30px;
+    }
+
+    .main-content h1::after {
+        width: 60px;
+    }
+
+    .intro p {
+        font-size: 16px;
+    }
+
+    .tips-section {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-card {
+        padding: 20px;
+    }
+
+    .tip-icon {
+        font-size: 24px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .tip-card h2 {
+        font-size: 18px;
+    }
+
+    .tip-card p {
+        font-size: 14px;
+    }
+
+    .video-section h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 20px 10px;
+    }
+
+    .main-content h1 {
+        font-size: 26px;
+    }
+
+    .intro p {
+        font-size: 14px;
+    }
+
+    .tip-card {
+        padding: 15px;
+    }
+
+    .tip-icon {
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .tip-card h2 {
+        font-size: 16px;
+    }
+
+    .tip-card p {
+        font-size: 13px;
+    }
+
+    .video-section h2 {
+        font-size: 20px;
+    }
+}

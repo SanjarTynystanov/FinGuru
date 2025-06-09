@@ -1,0 +1,114 @@
+/* Стили для формы регистрации */
+.auth-container {
+    padding: 60px 0;
+    background-color: var(--bg-color);
+    min-height: calc(100vh - 300px);
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 100px;
+}
+
+.auth-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.auth-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: border-color 0.3s ease;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.auth-form button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Стили для переключения видимости пароля */
+.auth-form .form-group.password {
+    position: relative;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 65%; /* Смещаем ниже, чтобы соответствовать центру поля пароля */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-color-secondary);
+    font-size: 16px;
+    user-select: none;
+}
+
+#togglePassword:hover {
+    color: var(--primary-color);
+}
+
+.auth-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--text-color-secondary);
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+.error {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 20px;
+    }
+
+    .auth-container h2 {
+        font-size: 20px;
+    }
+
+    .auth-form input {
+        padding: 8px;
+    }
+}

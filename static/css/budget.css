@@ -1,0 +1,307 @@
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    padding-bottom: 70px; /* Для кнопки справки */
+}
+
+body.light-theme {
+    background-color: #f9fafb;
+    color: #1f2937;
+}
+
+body.dark-theme {
+    background-color: #111827;
+    color: #d1d5db;
+}
+
+/* Контейнер и карточки */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-bg, #ffffff);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--card-border, #e5e7eb);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+body.dark-theme .card {
+    --card-bg: #1f2937;
+    --card-border: #374151;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для инпутов */
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--label-color, #4b5563);
+}
+
+body.dark-theme .input-group label {
+    --label-color: #9ca3af;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px 14px;
+    border: 1px solid var(--input-border, #d1d5db);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--input-bg, #ffffff);
+    color: var(--input-text, #1f2937);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+body.dark-theme .input-group input,
+body.dark-theme .input-group select {
+    --input-bg: #374151;
+    --input-border: #4b5563;
+    --input-text: #d1d5db;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.input-group .is-invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.input-group .btn {
+    margin-top: 12px;
+}
+
+/* Стили для кнопок */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-primary {
+    background-color: #60a5fa;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-secondary {
+    background-color: #9ca3af;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.btn-success {
+    background-color: #22c55e;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-success {
+    background-color: #34d399;
+}
+
+.btn-success:hover {
+    background-color: #16a34a;
+}
+
+.btn-warning {
+    background-color: #f59e0b;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-warning {
+    background-color: #fbbf24;
+}
+
+.btn-warning:hover {
+    background-color: #d97706;
+}
+
+.btn-info {
+    background-color: #06b6d4;
+    color: #ffffff;
+}
+
+body.dark-theme .btn-info {
+    background-color: #22d3ee;
+}
+
+.btn-info:hover {
+    background-color: #0891b2;
+}
+
+/* Стили для кнопки справки */
+#helpBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+    border-radius: 50%;
+    background-color: #06b6d4;
+    border: none;
+    font-size: 18px;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+body.dark-theme #helpBtn {
+    background-color: #22d3ee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#helpBtn:hover {
+    background-color: #0891b2;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+#helpBtn i {
+    margin: 0;
+}
+
+/* Стили для графиков */
+.budget-chart {
+    position: relative;
+    height: 350px;
+    margin-bottom: 24px;
+}
+
+#budget-total-chart {
+    max-height: 100%;
+    width: 100% !important;
+    border-radius: 12px;
+    background-color: var(--chart-bg, #ffffff);
+}
+
+body.dark-theme #budget-total-chart {
+    --chart-bg: #1f2937;
+}
+
+.budget-chart canvas {
+    border-radius: 12px;
+}
+
+/* Стили для прогресс-бара */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+body.dark-theme .progress-bar {
+    background-color: #4b5563;
+}
+
+#goalProgressBar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    background-color: #3b82f6;
+}
+
+.bg-success {
+    background-color: #22c55e !important;
+}
+
+.bg-danger {
+    background-color: #ef4444 !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .input-group input,
+    .input-group select {
+        max-width: 100%;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .budget-chart {
+        height: 250px;
+    }
+
+    #helpBtn {
+        width: 48px;
+        height: 48px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .budget-chart {
+        height: 200px;
+    }
+}

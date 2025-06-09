@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="register-title">FinGuru – Регистрация</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="light-theme">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo" aria-label="Перейти на главную страницу">
+                <img src="/static/images/myImage-Photoroom.png" alt="FinGuru Logo" class="logo-img" onerror="this.src='fallback-logo.png'">
+            </a>
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/" class="nav-link" data-lang-key="nav-home">Главная</a>
+                <div class="dropdown" role="menuitem">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="features-menu" data-lang-key="nav-features">
+                        Возможности
+                    </button>
+                    <div class="dropdown-menu" id="features-menu" role="menu">
+                        <a href="/currency" role="menuitem" data-lang-key="nav-currency">Конвертер</a>
+                        <a href="/budget" role="menuitem" data-lang-key="feature-budget-menu">Бюджет</a>
+                        <a href="/dashboard" role="menuitem" data-lang-key="feature-dashboard-menu">Панель управления</a>
+                        <a href="/goals" role="menuitem" data-lang-key="feature-goals-menu">Цели</a>
+                        <a href="/forecast" role="menuitem" data-lang-key="feature-forecast-menu">Прогноз</a>
+                        <a href="/reminders" role="menuitem" data-lang-key="feature-reminders-menu">Напоминания</a>
+                        <a href="/tips" role="menuitem" data-lang-key="feature-tips-menu">Советы</a>
+                    </div>
+                </div>
+                <div class="dropdown" role="menuitem">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="banks-menu" data-lang-key="nav-banks">
+                        Банки
+                    </button>
+                    <div class="dropdown-menu" id="banks-menu" role="menu">
+                        <a href="/banks/connected" role="menuitem" data-lang-key="banks-connected">Подключённые</a>
+                        <a href="/banks/add" role="menuitem" data-lang-key="banks-add">Добавить</a>
+                        <a href="/banks/settings" role="menuitem" data-lang-key="banks-settings">Настройки</a>
+                        <a href="/banks/faq" role="menuitem" data-lang-key="banks-faq">FAQ</a>
+                    </div>
+                </div>
+                <a href="/analytics" class="nav-link" data-lang-key="nav-analytics">Аналитика</a>
+                <a href="/faq" class="nav-link" data-lang-key="nav-faq">FAQ</a>
+            </nav>
+            <div class="header-actions" aria-label="Действия пользователя">
+                <div class="language-toggle" role="group" aria-label="Выбор языка">
+                    <button class="lang-btn" data-lang="en" aria-label="Английский">EN</button>
+                    <button class="lang-btn" data-lang="ru" aria-label="Русский">RU</button>
+                    <button class="lang-btn" data-lang="ky" aria-label="Кыргызский">KG</button>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тёмный режим">
+                    <i class="fas fa-sun light-icon" aria-hidden="true"></i>
+                    <i class="fas fa-moon dark-icon" aria-hidden="true"></i>
+                </button>
+                <div class="user-profile" id="user-profile">
+                    <!-- Будет заполнено через JS -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        <h2 data-lang-key="register-heading">Создать аккаунт</h2>
+        <form id="registerForm" class="auth-form">
+            <div class="form-group">
+                <label for="name" data-lang-key="name-label">Имя:</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" data-lang-key="name-placeholder" required>
+                <span class="error" id="name-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email" data-lang-key="email-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Введите ваш email" data-lang-key="email-placeholder" required>
+                <span class="error" id="email-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="password" data-lang-key="password-label">Пароль:</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" data-lang-key="password-placeholder" required>
+                <span class="error" id="password-error"></span>
+            </div>
+            <button type="submit" class="btn-primary" data-lang-key="register-btn">Зарегистрироваться</button>
+        </form>
+        <p class="auth-link" data-lang-key="already-have-account">Уже есть аккаунт? <a href="/login" data-lang-key="login-link">Войти</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 data-lang-key="footer-about-title">О FinGuru</h3>
+                    <p data-lang-key="footer-about-text">FinGuru - это ваш персональный финансовый помощник, разработанный, чтобы помочь вам легко управлять своими деньгами, отслеживать расходы и достигать финансовых целей.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 data-lang-key="quick-links">Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#hero" data-lang-key="nav-home">Главная</a></li>
+                        <li><a href="#features" data-lang-key="nav-features">Возможности</a></li>
+                        <li><a href="#how-it-works" data-lang-key="how-it-works">Как это работает</a></li>
+                        <li><a href="#testimonials" data-lang-key="testimonials">Отзывы</a></li>
+                        <li><a href="#cta" data-lang-key="cta">Начать</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contacts">
+                    <h3 data-lang-key="contacts">Контакты</h3>
+                    <ul>
+                        <li><a href="mailto:info@finguru.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@finguru.com</a></li>
+                        <li data-lang-key="phone">+7 (123) 456-78-90</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 123 Finance St, City, Country</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" target="_blank" data-lang-key="social-telegram" aria-label="Telegram">
+                            <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" target="_blank" data-lang-key="social-vk" aria-label="VK">
+                            <i class="fab fa-vk" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h3 data-lang-key="subscribe">Подписка</h3>
+                    <p data-lang-key="subscribe-text">Получайте последние новости и обновления</p>
+                    <form class="subscribe-form" aria-label="Форма подписки">
+                        <input type="email" placeholder="Ваш email" required aria-label="Email для подписки">
+                        <button type="submit" data-lang-key="subscribe-btn" aria-label="Подписаться">Подписаться</button>
+                    </form>
+                    <p class="subscribe-message">Мы заботимся о ваших данных в нашей <a href="#" data-lang-key="privacy-policy">политике конфиденциальности</a>.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang-key="footer-copyright">© 2025 FinGuru. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="/privacy" data-lang-key="privacy-policy">Политика конфиденциальности</a>
+                    <a href="/terms" data-lang-key="terms-of-use">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+     
+    <script src="/static/js/register.js"></script>
+    <script>
+        function logoutUser() {
+            fetch('/logout', {
+                method: 'POST',
+            })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.removeItem('currentUser'); // Очищаем localStorage
+                alert(data.message);
+                window.location.href = data.redirect;
+            })
+            .catch(err => console.error('Ошибка при выходе:', err));
+        }
+    </script>
+</body>
+</html>

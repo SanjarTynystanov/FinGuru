@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="budget-title">FinGuru – Умный бюджет</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/budget.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <!-- Добавляем библиотеку для модальных окон -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="light-theme">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo" aria-label="Перейти на главную страницу">
+                <img src="/static/images/myImage-Photoroom.png" alt="FinGuru Logo" class="logo-img" onerror="this.src='fallback-logo.png'">
+            </a>
+            <nav class="main-nav" aria-label="Основная навигация">
+                <a href="/" class="nav-link" data-lang-key="nav-home">Главная</a>
+                <div class="dropdown" role="menuitem">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="features-menu" data-lang-key="nav-features">
+                        Возможности
+                    </button>
+                    <div class="dropdown-menu" id="features-menu" role="menu">
+                        <a href="/currency" role="menuitem" data-lang-key="nav-currency">Конвертер</a>
+                        <a href="/budget" role="menuitem" data-lang-key="feature-budget-menu">Бюджет</a>
+                        <a href="/dashboard" role="menuitem" data-lang-key="feature-dashboard-menu">Панель управления</a>
+                        <a href="/goals" role="menuitem" data-lang-key="feature-goals-menu">Цели</a>
+                        <a href="/forecast" role="menuitem" data-lang-key="feature-forecast-menu">Прогноз</a>
+                        <a href="/reminders" role="menuitem" data-lang-key="feature-reminders-menu">Напоминания</a>
+                        <a href="/tips" role="menuitem" data-lang-key="feature-tips-menu">Советы</a>
+                    </div>
+                </div>
+                <div class="dropdown" role="menuitem">
+                    <button class="dropdown-toggle" aria-expanded="false" aria-controls="banks-menu" data-lang-key="nav-banks">
+                        Банки
+                    </button>
+                    <div class="dropdown-menu" id="banks-menu" role="menu">
+                        <a href="/banks/connected" role="menuitem" data-lang-key="banks-connected">Подключённые</a>
+                        <a href="/banks/add" role="menuitem" data-lang-key="banks-add">Добавить</a>
+                        <a href="/banks/settings" role="menuitem" data-lang-key="banks-settings">Настройки</a>
+                        <a href="/banks/faq" role="menuitem" data-lang-key="banks-faq">FAQ</a>
+                    </div>
+                </div>
+                <a href="/analytics" class="nav-link" data-lang-key="nav-analytics">Аналитика</a>
+                <a href="/faq" class="nav-link" data-lang-key="nav-faq">FAQ</a>
+            </nav>
+            <div class="header-actions" aria-label="Действия пользователя">
+                <div class="language-toggle" role="group" aria-label="Выбор языка">
+                    <button class="lang-btn" data-lang="en" aria-label="Английский">EN</button>
+                    <button class="lang-btn" data-lang="ru" aria-label="Русский">RU</button>
+                    <button class="lang-btn" data-lang="ky" aria-label="Кыргызский">KG</button>
+                </div>
+               <button class="theme-toggle" id="themeToggle" aria-label="Переключить тёмный режим">
+              <i class="fas fa-sun light-icon" aria-hidden="true"></i>
+              <i class="fas fa-moon dark-icon" aria-hidden="true"></i>
+              </button>
+                {% if user %}
+                    <div class="user-profile">
+                        <div class="user-avatar" data-initial="{{ user.name[0] }}">{{ user.name[0] }}</div>
+                        <span class="user-name">{{ user.name }}</span>
+                        <a onclick="logoutUser()" class="btn-logout" data-lang-key="logout">Выход</a>
+                    </div>
+                {% else %}
+                    <a href="/login" class="btn-login active" data-lang-key="login">Войти</a>
+                    <a href="/register" class="btn-login" data-lang-key="register">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="budget-hero">
+            <div class="container">
+                <h1 data-lang-key="budget-title">Умный бюджет</h1>
+                <p class="subtitle" data-lang-key="budget-subtitle">Контролируйте свои финансы и достигайте целей с лёгкостью</p>
+                <div class="budget-info">
+                    <p data-lang-key="budget-info">Здесь вы можете управлять своим бюджетом: указать доходы, рассчитать расходы вручную или загрузить их из банка, установить финансовые цели.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="budget-dashboard">
+            <div class="container">
+                <div class="budget-inputs card">
+                    <h3 data-lang-key="budget-input-title">Ваши финансы</h3>
+                    <div class="input-group">
+                        <label for="income" data-lang-key="income-label">Доходы (руб):</label>
+                        <input type="number" id="income" placeholder="0" min="0" required
+                               data-toggle="tooltip" title="Введите ваш ежемесячный доход">
+                    </div>
+                    <div class="expenses-section">
+                        <h4 data-lang-key="manual-expenses-title">Ручной расчет расходов</h4>
+                        <div class="input-group">
+                            <label for="expense-rent" data-lang-key="expense-rent">Аренда:</label>
+                            <input type="number" id="expense-rent" min="0" required
+                                   data-toggle="tooltip" title="Стоимость аренды жилья">
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-food" data-lang-key="expense-food">Еда:</label>
+                            <input type="number" id="expense-food" min="0" required
+                                   data-toggle="tooltip" title="Ежемесячные расходы на питание">
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-utilities" data-lang-key="expense-utilities">Коммунальные услуги:</label>
+                            <input type="number" id="expense-utilities" min="0" required
+                                   data-toggle="tooltip" title="Платежи за коммунальные услуги">
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-other" data-lang-key="expense-other">Прочее:</label>
+                            <input type="number" id="expense-other" min="0" required
+                                   data-toggle="tooltip" title="Дополнительные расходы">
+                        </div>
+                        <button id="calculateManual" class="btn btn-primary" data-lang-key="calculate-manual">Рассчитать вручную</button>
+                        <!-- Кнопка автозаполнения -->
+                        <button id="autoFillExpenses" class="btn btn-secondary" data-lang-key="auto-fill">Автозаполнить (10% дохода)</button>
+                    </div>
+                    <div class="expenses-section bank-connection">
+                        <h4 data-lang-key="bank-expenses-title">Расчет из банка</h4>
+                        <input type="number" id="expense-bank" placeholder="0" min="0" readonly
+                               data-toggle="tooltip" title="Расходы, загруженные из банка">
+                        <button class="btn btn-secondary" id="fetchExpenses" data-lang-key="fetch-expenses">Загрузить из банка</button>
+                        <div class="bank-connect">
+                            <h5 data-lang-key="bank-connect-title">Подключение банков</h5>
+                            <div class="input-group">
+                                <label for="bankSelect" data-lang-key="bank-select">Выберите банк:</label>
+                                <select id="bankSelect" required>
+                                    <option value="Sberbank">Sberbank</option>
+                                    <option value="Tinkoff">Tinkoff</option>
+                                    <option value="Alfa-Bank">Alfa-Bank</option>
+                                    <option value="Точка">Точка</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="bankAccount" data-lang-key="bank-account">Номер счёта:</label>
+                                <input type="text" id="bankAccount" placeholder="Введите номер счёта" required
+                                       data-toggle="tooltip" title="Введите номер банковского счёта">
+                            </div>
+                            <button id="bankConnect" class="btn btn-primary" data-lang-key="bank-connect-btn">Подключить</button>
+                            <button id="bankSync" class="btn btn-secondary" data-lang-key="bank-sync">Синхронизировать выписки</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="calculateTotal" data-lang-key="calculate-total">Рассчитать общий баланс</button>
+                    <p id="balanceResult" data-lang-key="balance-result">Остаток: 0 руб.</p>
+                    <button class="btn btn-warning" id="resetData" data-lang-key="reset-data">Сбросить данные</button>
+                    <!-- Кнопка сохранения -->
+                    <button id="saveData" class="btn btn-info" data-lang-key="save-data">Сохранить данные</button>
+                </div>
+
+                <div class="budget-goals card">
+                    <h3 data-lang-key="goal-title">Финансовые цели</h3>
+                    <div class="goal-input">
+                        <div class="input-group">
+                            <button id="currencyToggle" class="btn btn-secondary" data-lang-key="currency-toggle">Валюта: RUB</button>
+                            <label for="goalAmount" data-lang-key="goal-amount">Сумма:</label>
+                            <input type="number" id="goalAmount" placeholder="Например, 500000" min="0" required
+                                   data-toggle="tooltip" title="Целевая сумма в выбранной валюте">
+                        </div>
+                        <div class="input-group">
+                            <label for="goalName" data-lang-key="goal-name">Название цели:</label>
+                            <select id="goalName" required>
+                                <option value="Машина">Машина</option>
+                                <option value="Квартира">Квартира</option>
+                                <option value="Путешествие">Путешествие</option>
+                                <option value="Инвестиции">Инвестиции</option>
+                                <option value="Образование">Образование</option>
+                                <option value="Ремонт">Ремонт</option>
+                                <option value="Новый гаджет">Новый гаджет</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="goalPeriod" data-lang-key="goal-period">Срок (месяцев):</label>
+                            <input type="number" id="goalPeriod" placeholder="Например, 24" min="1" required
+                                   data-toggle="tooltip" title="Срок достижения цели в месяцах">
+                        </div>
+                        <div class="input-group">
+                            <label for="goalPriority" data-lang-key="goal-priority">Приоритет:</label>
+                            <select id="goalPriority" required>
+                                <option value="Низкий">Низкий</option>
+                                <option value="Средний">Средний</option>
+                                <option value="Высокий">Высокий</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="forecastPeriod" data-lang-key="forecast-period">Период прогноза:</label>
+                            <select id="forecastPeriod">
+                                <option value="1">1 месяц</option>
+                                <option value="3">3 месяца</option>
+                                <option value="6">6 месяцев</option>
+                                <option value="12">1 год</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="setGoal" data-lang-key="set-goal">Установить цель</button>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="goalProgressBar" style="width: 0%;"></div>
+                    </div>
+                    <p id="goalProgressText" data-lang-key="progress-text">Прогресс: 0%</p>
+                    <p id="forecastResult" data-lang-key="forecast-result"></p>
+                    <div class="goal-tips">
+                        <h4 data-lang-key="goal-tips-title">Советы по достижению целей</h4>
+                        <ul>
+                            <li data-lang-key="goal-tip-1">Откладывайте 10-20% дохода ежемесячно.</li>
+                            <li data-lang-key="goal-tip-2">Сократите необязательные расходы.</li>
+                            <li data-lang-key="goal-tip-3">Используйте автоматические переводы на сберегательный счет.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="budget-chart card">
+                    <h3 data-lang-key="chart-title">Обзор бюджета</h3>
+                    <canvas id="budget-total-chart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 data-lang-key="footer-about-title">О FinGuru</h3>
+                    <p data-lang-key="footer-about-text">FinGuru - это ваш персональный финансовый помощник, разработанный, чтобы помочь вам легко управлять своими деньгами, отслеживать расходы и достигать финансовых целей.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 data-lang-key="quick-links">Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#hero" data-lang-key="nav-home">Главная</a></li>
+                        <li><a href="#features" data-lang-key="nav-features">Возможности</a></li>
+                        <li><a href="#how-it-works" data-lang-key="how-it-works">Как это работает</a></li>
+                        <li><a href="#testimonials" data-lang-key="testimonials">Отзывы</a></li>
+                        <li><a href="#cta" data-lang-key="cta">Начать</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contacts">
+                    <h3 data-lang-key="contacts">Контакты</h3>
+                    <ul>
+                        <li><a href="mailto:info@finguru.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@finguru.com</a></li>
+                        <li data-lang-key="phone">+7 (123) 456-78-90</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 123 Finance St, City, Country</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" target="_blank" data-lang-key="social-telegram" aria-label="Telegram">
+                            <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" target="_blank" data-lang-key="social-vk" aria-label="VK">
+                            <i class="fab fa-vk" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h3 data-lang-key="subscribe">Подписка</h3>
+                    <p data-lang-key="subscribe-text">Получайте последние новости и обновления</p>
+                    <form class="subscribe-form" aria-label="Форма подписки">
+                        <input type="email" placeholder="Ваш email" required aria-label="Email для подписки">
+                        <button type="submit" data-lang-key="subscribe-btn" aria-label="Подписаться">Подписаться</button>
+                    </form>
+                    <p class="subscribe-message">Мы заботимся о ваших данных в нашей <a href="#" data-lang-key="privacy-policy">политике конфиденциальности</a>.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang-key="footer-copyright">© 2025 FinGuru. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="/privacy" data-lang-key="privacy-policy">Политика конфиденциальности</a>
+                    <a href="/terms" data-lang-key="terms-of-use">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для справки -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpModalLabel" data-lang-key="help-title">Справка</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p data-lang-key="help-text">Используйте эту страницу для управления бюджетом. Введите доходы и расходы, подключите банк для автоматического обновления данных, установите финансовые цели и отслеживайте прогресс.</p>
+                    <ul>
+                        <li data-lang-key="help-step-1">Введите доходы в поле "Доходы".</li>
+                        <li data-lang-key="help-step-2">Укажите расходы вручную или загрузите из банка.</li>
+                        <li data-lang-key="help-step-3">Нажмите "Рассчитать общий баланс" для анализа.</li>
+                        <li data-lang-key="help-step-4">Установите цель и следите за прогрессом.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang-key="close">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка справки -->
+    <button id="helpBtn" class="btn btn-info" style="position: fixed; bottom: 20px; right: 20px;" data-lang-key="help-btn">
+        <i class="fas fa-question"></i> Справка
+    </button>
+
+    <script src="/static/js/budget.js"></script>
+    <script>
+        function logoutUser() {
+            fetch('/logout', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    window.location.href = data.redirect;
+                })
+                .catch(err => console.error('Ошибка при выходе:', err));
+        }
+
+        // Инициализация модального окна
+        document.addEventListener('DOMContentLoaded', () => {
+            const helpBtn = document.getElementById('helpBtn');
+            helpBtn.addEventListener('click', () => {
+                new bootstrap.Modal(document.getElementById('helpModal')).show();
+            });
+
+            // Инициализация тултипов
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>
