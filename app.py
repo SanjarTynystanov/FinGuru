@@ -11,6 +11,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = os.path.join(os.path.dirname(__file__), 'flask_session')
 
 db = SQLAlchemy(app)
 Session(app)
@@ -46,7 +47,6 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        # Автоматический вход после регистрации
         session['user'] = {'id': new_user.id, 'name': new_user.name, 'email': new_user.email}
         return jsonify({'message': 'Регистрация успешна!', 'redirect': '/goals'}), 200
 
@@ -93,13 +93,8 @@ def currency():
 @app.route('/goals')
 def goals():
     user = session.get('user')
-    print(f"User from session: {user}")  # Отладочный вывод
-    if user:
-        if not isinstance(user, dict):
-            user = {'id': getattr(user, 'id', None), 'name': getattr(user, 'name', None), 'email': getattr(user, 'email', None)}
-    else:
-        user = None
-    print(f"Processed user for template: {user}")  # Отладочный вывод
+    if user and not isinstance(user, dict):
+        user = {'id': getattr(user, 'id', None), 'name': getattr(user, 'name', None), 'email': getattr(user, 'email', None)}
     return render_template('goals.html', user=user)
 
 @app.route('/reminders')
@@ -128,10 +123,8 @@ def faq():
 @app.route('/analytics')
 def analytics():
     if not session.get('user'):
-        if request.accept_mimetypes.accept_html:
-            flash('Необходима авторизация для просмотра аналитики', 'danger')
-            return redirect(url_for('login'))
-        return jsonify({'error': 'Необходима авторизация', 'redirect': '/login'}), 401
+        flash('Необходима авторизация для просмотра аналитики', 'danger')
+        return redirect(url_for('login'))
     return render_template('analytics.html', user=session.get('user'))
 
 @app.route('/api/calculate', methods=['POST'])
@@ -150,6 +143,4 @@ def calculate():
         return jsonify({'error': 'Income and expenses must be numbers'}), 400
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
-
+    app.run(host="0.0.0.0", port=8080, debug=True)
