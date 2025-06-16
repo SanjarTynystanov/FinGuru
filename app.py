@@ -90,6 +90,18 @@ def terms():
 def currency():
     return render_template('currency.html', user=session.get('user'))
 
+@app.route('/banks')
+def banks():
+    return render_template('banks.html', user=session.get('user'))
+
+@app.route('/credits')
+def credits():
+    return render_template('credits.html', user=session.get('user'))
+
+@app.route('/actives')
+def actives():
+    return render_template('actives.html', user=session.get('user'))
+
 @app.route('/goals')
 def goals():
     user = session.get('user')

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinGuru</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="budget.js" defer></script>
+</head>
+<body>
     <header class="header">
         <div class="container">
             <a href="/" class="logo" aria-label="Перейти на главную страницу">
                 <img src="/static/images/myImage-Photoroom.png" alt="FinGuru Logo" class="logo-img" onerror="this.src='fallback-logo.png'">
             </a>
+            <button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
             <nav class="main-nav" aria-label="Основная навигация">
                 <a href="/" class="nav-link" data-lang-key="nav-home">Главная</a>
                 <div class="dropdown" role="menuitem">
@@ -33,9 +37,9 @@
                         Банки
                     </button>
                     <div class="dropdown-menu" id="banks-menu" role="menu">
-                        <a href="/banks/connected" role="menuitem" data-lang-key="banks-connected">Подключённые</a>
-                        <a href="/banks/add" role="menuitem" data-lang-key="banks-add">Добавить</a>
-                        <a href="/banks/settings" role="menuitem" data-lang-key="banks-settings">Настройки</a>
+                        <a href="/banks" role="menuitem" data-lang-key="banks-а">Банки Кыргызстана</a>
+                        <a href="/credits" role="menuitem" data-lang-key="banks-a">Кредиты</a>
+                        <a href="/banks/settings" role="menuitem" data-lang-key="banks-s">Активы</a>
                         <a href="/banks/faq" role="menuitem" data-lang-key="banks-faq">FAQ</a>
                     </div>
                 </div>
@@ -56,7 +60,7 @@
                     <div class="user-profile">
                         <div class="user-avatar" data-initial="{{ user.name[0] }}">{{ user.name[0] }}</div>
                         <span class="user-name">{{ user.name }}</span>
-                        <a onclick="logoutUser()" class="btn-logout" data-lang-key="logout">Выход</a>
+                        <a onclick="logoutUser()" class="btn-logout" data-lang-key="logout"><i class="fas fa-sign-out-alt"></i>Выход</a>
                     </div>
                 {% else %}
                     <a href="/login" class="btn-login active" data-lang-key="login">Войти</a>
@@ -65,14 +69,168 @@
             </div>
         </div>
     </header>
+
+    <main>
+
+        <section class="bank" id="mbank">
+            <h2 data-lang-key="mbank-title">MBANK</h2>
+            <p><a href="https://mbank.kg/" target="_blank" class="bank-link" data-lang-key="mbank-site">Официальный сайт MBANK</a></p>
+            <h3 data-lang-key="mbank-consumer-title">Потребительские кредиты</h3>
+            <ul>
+              <li data-lang-key="mbank-consumer-amount">Сумма: до 750 000 сом</li>
+              <li data-lang-key="mbank-consumer-term">Срок: до 60 месяцев</li>
+              <li data-lang-key="mbank-consumer-rate">Процентная ставка: от 21% годовых (первые 36 месяцев от 19%)</li>
+              <li data-lang-key="mbank-consumer-no-fee">Без комиссии, под поручительство</li>
+              <li data-lang-key="mbank-consumer-age">Возраст заемщика: от 18 до 65 лет</li>
+            </ul>
+            <h3 data-lang-key="mbank-online-title">Онлайн-кредит</h3>
+            <ul>
+              <li data-lang-key="mbank-online-amount">Сумма: до 500 000 сом</li>
+              <li data-lang-key="mbank-online-term">Срок: от 3 до 36 месяцев</li>
+              <li data-lang-key="mbank-online-rate">Процентная ставка: от 22% годовых, по акции 24%</li>
+              <li data-lang-key="mbank-online-no-collateral">Без залога, документов и поручителей</li>
+              <li data-lang-key="mbank-online-approval">Одобрение за 1 минуту</li>
+            </ul>
+            <h3 data-lang-key="mbank-mortgage-title">Ипотека "Мой дом"</h3>
+            <ul>
+              <li data-lang-key="mbank-mortgage-amount">Сумма: до 8 000 000 сом</li>
+              <li data-lang-key="mbank-mortgage-term">Срок: до 120 месяцев (10 лет)</li>
+              <li data-lang-key="mbank-mortgage-rate">Процентная ставка: первые 3 года от 19%, далее от 20%</li>
+              <li data-lang-key="mbank-mortgage-refinance">Рефинансирование не проблемных ипотечных кредитов</li>
+            </ul>
+          </section>
+          
+          <section class="bank" id="bakai">
+            <h2 data-lang-key="bakai-title">Бакай Банк</h2>
+            <p><a href="https://bakai.kg" target="_blank" class="bank-link" data-lang-key="bakai-site">Официальный сайт Бакай Банка</a></p>
+            <h3 data-lang-key="bakai-consumer-title">Потребительские кредиты</h3>
+            <ul>
+              <li data-lang-key="bakai-consumer-amount">Сумма: до 1 000 000 сом</li>
+              <li data-lang-key="bakai-consumer-term">Срок: до 60 месяцев</li>
+              <li data-lang-key="bakai-consumer-rate">Процентная ставка: от 20% годовых</li>
+              <li data-lang-key="bakai-consumer-no-collateral">Без залога, с поручительством</li>
+            </ul>
+            <h3 data-lang-key="bakai-auto-title">Автокредиты</h3>
+            <ul>
+              <li data-lang-key="bakai-auto-amount">Сумма: до 5 000 000 сом</li>
+              <li data-lang-key="bakai-auto-initial">Первоначальный взнос: от 10%</li>
+              <li data-lang-key="bakai-auto-rate">Процентная ставка: от 18% годовых</li>
+            </ul>
+          </section>
+          
+          <section class="bank" id="optika">
+            <h2 data-lang-key="optika-title">Оптика Банк</h2>
+            <p><a href="https://optikabank.kg" target="_blank" class="bank-link" data-lang-key="optika-site">Официальный сайт Оптика Банка</a></p>
+            <h3 data-lang-key="optika-consumer-title">Потребительские кредиты</h3>
+            <ul>
+              <li data-lang-key="optika-consumer-amount">Сумма: до 700 000 сом</li>
+              <li data-lang-key="optika-consumer-term">Срок: до 48 месяцев</li>
+              <li data-lang-key="optika-consumer-rate">Процентная ставка: от 22% годовых</li>
+              <li data-lang-key="optika-consumer-no-collateral">Без залога, с поручительством</li>
+            </ul>
+            <h3 data-lang-key="optika-business-title">Кредиты на развитие бизнеса</h3>
+            <ul>
+              <li data-lang-key="optika-business-amount">Сумма: до 1 000 000 сом</li>
+              <li data-lang-key="optika-business-term">Срок: до 60 месяцев</li>
+              <li data-lang-key="optika-business-rate">Процентная ставка: от 20% годовых</li>
+            </ul>
+          </section>
+          
+          <section class="bank" id="temir">
+            <h2 data-lang-key="temir-title">Демир Банк</h2>
+            <p><a href="https://temirbank.kg" target="_blank" class="bank-link" data-lang-key="temir-site">Официальный сайт Темир Банка</a></p>
+            <h3 data-lang-key="temir-consumer-title">Потребительские кредиты</h3>
+            <ul>
+              <li data-lang-key="temir-consumer-amount">Сумма: до 800 000 сом</li>
+              <li data-lang-key="temir-consumer-term">Срок: до 60 месяцев</li>
+              <li data-lang-key="temir-consumer-rate">Процентная ставка: от 21% годовых</li>
+              <li data-lang-key="temir-consumer-no-collateral">Без залога</li>
+            </ul>
+            <h3 data-lang-key="temir-mortgage-title">Ипотечные кредиты</h3>
+            <ul>
+              <li data-lang-key="temir-mortgage-amount">Сумма: до 7 000 000 сом</li>
+              <li data-lang-key="temir-mortgage-term">Срок: до 120 месяцев</li>
+              <li data-lang-key="temir-mortgage-rate">Процентная ставка: от 17% годовых</li>
+            </ul>
+          </section>
+          
+          <section class="bank" id="obank">
+            <h2 data-lang-key="obank-title">О! Банк</h2>
+            <p><a href="https://obank.kg" target="_blank" class="bank-link" data-lang-key="obank-site">Официальный сайт О! Банка</a></p>
+            <h3 data-lang-key="obank-consumer-title">Потребительские кредиты</h3>
+            <ul>
+              <li data-lang-key="obank-consumer-amount">Сумма: до 600 000 сом</li>
+              <li data-lang-key="obank-consumer-term">Срок: до 48 месяцев</li>
+              <li data-lang-key="obank-consumer-rate">Процентная ставка: от 23% годовых</li>
+              <li data-lang-key="obank-consumer-no-collateral">Без залога</li>
+            </ul>
+            <h3 data-lang-key="obank-cash-title">Кредиты наличными</h3>
+            <ul>
+              <li data-lang-key="obank-cash-amount">Сумма: до 500 000 сом</li>
+              <li data-lang-key="obank-cash-term">Срок: до 36 месяцев</li>
+              <li data-lang-key="obank-cash-rate">Процентная ставка: от 24% годовых</li>
+            </ul>
+          </section>
+          
       
+      </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 data-lang-key="footer-about-title">О FinGuru</h3>
+                    <p data-lang-key="footer-about-text">FinGuru - это ваш персональный финансовый помощник, разработанный, чтобы помочь вам легко управлять своими деньгами, отслеживать расходы и достигать финансовых целей.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 data-lang-key="quick-links">Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#hero" data-lang-key="nav-home">Главная</a></li>
+                        <li><a href="#features" data-lang-key="nav-features">Возможности</a></li>
+                        <li><a href="#how-it-works" data-lang-key="how-it-works">Как это работает</a></li>
+                        <li><a href="#testimonials" data-lang-key="testimonials">Отзывы</a></li>
+                        <li><a href="#cta" data-lang-key="cta">Начать</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contacts">
+                    <h3 data-lang-key="contacts">Контакты</h3>
+                    <ul>
+                        <li><a href="mailto:info@finguru.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@finguru.com</a></li>
+                        <li data-lang-key="phone">+7 (123) 456-78-90</li>
+                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 123 Finance St, City, Country</li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" target="_blank" data-lang-key="social-telegram" aria-label="Telegram">
+                            <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" target="_blank" data-lang-key="social-vk" aria-label="VK">
+                            <i class="fab fa-vk" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-newsletter">
+                    <h3 data-lang-key="subscribe">Подписка</h3>
+                    <p data-lang-key="subscribe-text">Получайте последние новости и обновления</p>
+                    <form class="subscribe-form" aria-label="Форма подписки">
+                        <input type="email" placeholder="Ваш email" required aria-label="Email для подписки">
+                        <button type="submit" data-lang-key="subscribe-btn" aria-label="Подписаться">Подписаться</button>
+                    </form>
+                    <p class="subscribe-message">Мы заботимся о ваших данных в нашей <a href="#" data-lang-key="privacy-policy">политике конфиденциальности</a>.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang-key="footer-copyright">© 2025 FinGuru. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="/privacy" data-lang-key="privacy-policy">Политика конфиденциальности</a>
+                    <a href="/terms" data-lang-key="terms-of-use">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
     <style>
-        body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background-color: #9c96ff;
-        }
-      /* --- Базовые переменные для светлой темы --- */
+        /* --- Базовые переменные для светлой темы --- */
 :root {
     /* Цвета */
     --primary-color: #6c63ff; /* Основной цвет */
@@ -125,8 +283,8 @@
 
 body {
     margin: 0;
-    background-color: #9c96ff;
-    color: #9c96ff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     transition: var(--transition);
     line-height: 1.6;
     font-family: 'Roboto', sans-serif;
@@ -341,13 +499,7 @@ body {
         border-bottom: 1px solid var(--border-color);
     }
 
-    .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        padding: 10px 20px;
-    }
+   
 
     .language-toggle {
         display: flex;
@@ -439,7 +591,7 @@ body.dark-theme .dropdown-menu a {
 body.dark-theme .dropdown-menu a:hover,
 body.dark-theme .dropdown-menu a:focus {
     background: var(--primary-dark);
-    color: #9c96ff;
+    color: white;
 }
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
@@ -1393,7 +1545,7 @@ section {
     padding: 60px 0 30px;
     color: var(--text-light);
     font-size: 0.9em;
-    margin-top: 250px;
+    margin-top: 50px;
     border-top: 1px solid var(--border-color);
 }
 
@@ -1738,176 +1890,77 @@ section {
         padding: 10px 15px;
     }
 }
-        /* Внешний контейнер — центрируем и убираем overflow:hidden */
-        .carousel-wrapper {
-          width: 960px;
-          margin: 40px auto;
-          position: relative;
-        }
-      
-        /* Контейнер карусели — НЕ скрываем переполнение */
-        .carousel {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 300px;
-          /* Убираем overflow: hidden, чтобы карточки могли выходить за пределы */
-          overflow: visible;
-          position: relative;
-        }
-      
-        /* Внутренний блок для сдвига */
-        .carousel-inner {
-          display: flex;
-          transition: transform 0.5s ease;
-          will-change: transform;
-        }
-      
-        .carousel-item {
-          flex: 0 0 300px;
-          margin: 0 10px;
-          cursor: pointer;
-          transition: transform 0.3s ease;
-          background: #fff;
-          position: relative; /* для z-index */
-          /* Убираем скругления и тени */
-          border-radius: 0;
-          box-shadow: none;
-        }
-      
-        /* При увеличении карточка "выплывает" поверх */
-        .carousel-item:hover {
-          transform: scale(1.3);
-          z-index: 10;
-        }
-      
-        .carousel-item img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          display: block;
-          border-radius: 0;
-          box-shadow: none;
-        }
-      
-        /* Кнопки перелистывания */
-        .prev-btn, .next-btn {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: white;
-          border: none;
-          border-radius: 50%;
-          width: 44px;
-          height: 44px;
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: background-color 0.3s ease;
-          z-index: 20;
-        }
-      
-        .prev-btn:hover, .next-btn:hover {
-          background-color: #eee;
-        }
-      
-        .prev-btn {
-          left: -60px; /* Сдвигаем кнопки немного влево/вправо за пределы карусели */
-        }
-      
-        .next-btn {
-          right: -60px;
-        }
-      
-        .prev-btn svg, .next-btn svg {
-          stroke: #333;
-          stroke-width: 2.5;
-          fill: none;
-        }
-      </style>
-      </head>
-      <body>
-      
-      <div class="carousel-wrapper">
-        <div class="carousel">
-          <button class="prev-btn" aria-label="Предыдущий слайд">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-      
-          <div class="carousel-inner">
-            <div class="carousel-item"><a href="https://mbank.kg"><img src="data:image/jpeg;base64,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" alt="Изображение 1"></a></div>
-            <div class="carousel-item"><a href="https://www.bakai.kg/ru/"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQQAAADCCAMAAACYEEwlAAAAnFBMVEX///8BV6PV1dSdnp6Wl5cATJ4AVKIATZ+am5sAUqEASp4AVaIASJ3s7OwAUKAARZxKerSwxNyzs7NDdLG2t7eludW8zOHL2OgAQpvo6OhylcL4+/24yeA5cK/b5fDl7PSIpcsYYKikpaXBwsKWsNFfiLvD0uQAPpnLy8tVgbjv9Pnj6vNji73g4OCqvtnU3+yMp8x9ncYpZ6sAN5ZwYknVAAAKOklEQVR4nO2dZ3PbuhKGV2IvIi1ZnZas6qi65P7//3aBRWex55w5cWaSfT/EJgiSwIPF7gKkJzDq//UaQR/+evUJAkFAEQQgCCiCAAQBRRCAIKAIAhAEFEEAgoAiCEAQUAQBCAKKIABBQBEEIAgoggAEAUUQgCCgCAIQBBRBAIKAIghAEFAEAQgCiiAAQUARBCAIKIIABAFFEIAgoAgCEAQUQQCCgCIIQBBQBAEIAoogAEFAEQQgCCiCAAQBRRCAIKAIAhAEFEEAgoAiCEAQUAQBCAKKIABBQBEEIAgoggBfQLjMniaHw+Rpdvm+Bv0OdUK4DG+9PA0ipiDNt8tp9b0N+051QJgd8yDJelpZkkbL9Xc37rvUCmG2ypNeXVlSnv9QDC0QLscyayBAJeXH72jjL1cTwktRtCPgirZ/ojE0IBzm3QiYwnL4exr6K1WHsMwtL1AEeZ6maR7YtjE//Kam/jrVICxT4wDy7eZpfamqy3r4kVmesvzjKLgQ3rUdJKUbEWfnMtS28PTNjfzVciBMlT/IymMjSVyvUn32D/OONoRLJENjGLSO9aFU3nH7be37FtkQznLeh73n9sqzVFKKNlbp81Tp5dq45O2FyS5+eWIamgcM8Vg9gFWe2ja4fluv12+iZCDVbNfgbhc2q8iS2glzLwvCS6kYdK6X1oFyjla/Xn8EUmke3WozpWDRpVxZBaucVfyhLe2JX5zLCpcfrPZ8adcu8zz/8Yq/j3yheHeqrWM8f2Qd7Xx/7J5nV/LusmvdQr8J4afwfFnQYQdcMwmqOJqyoSLTw9x6Y9d/QT9i+5BH/pRg6jw0kJZwiHjt3Orig3V6FHsxQohj/24/ZOF7vnUNq+e7cX8cY3c9z3NqxcowDISpjAwlNrB65sJbV9xu1EMOQcMUbAi8DzYFMcMKa3BdCK8cUhbJoy3OtmDSBSG+DwaL+2nHermwHrJn/Tk53fNix1ZaIIwtBhaEB2EIyQ2PZv9jdlgWS3azMRrhTtZbiWqFWUUICFmSyBg6N+N+KaVxmTY5EC6YhUXv4mgmhiGz3K4LQZkv64E1puCz3u1qEOz50QJh7HDUEJ6lIeTCIczQjrOI+QcGmsvf44k3OSESF0K2vd0eg7DGR9i3M7gOBDSULJWIbjIxzWdfQICdZ02IfhyzU6ZLDAI7b5lGE4LLwECYRM4Iz1I9+SUEdZm0mPTFgRA+cJBoz+FPffetirmmyIawwYcEMgO9BLK2NMZPIJxiy/7ZNKn8eGwfL1gnrUhQh7D33fmkIci+lc8uhN68UhDkc4Svs8bbQBBXZT11Rth35gyuBeGAp3XSgcOAHEodnjog3ON4r6owAHvecQuCX/V9e4LUIHAGjmdVECqxjxSqaKYh5FcFQd1WpFRmcC0I6AP0PYR9h9wcCj24BsKHmIA6dPBAkaHtRHp10g1BW8KJTwU2JXRAwHojC1MNQoOBhrAWLdKPN5Zw0ZYgnc0tEe5COTsLwltq+Tm48NwquR0K42oUhBeWhYugUr7KE2+8BcXhGNq21AFhbwVJ1jD2bxzrkRf17FnvQDg1GGgIU9GkVJmtgpCsjE+Ql0rvkasRNBAqHjqyueovVkyn19KmixCKzU2ux0xAXXK2+TM2JFUhtANC7GnrX/g45GNzUtS7+3YsMBA4g/o+koIg/XiqEiUJIcmvOjqM3FPaM4oQ+fPj41bwJs/1rgvad8p+ZlbcexQRRGTomUmtKj7L+Bzj5hOeP4Mw2FmGIDt497X5y3rjWDtLC0IbAw1hI8JToMpnPINlCe9V5Qkm5lzFzNGLLJksFQW6lUgngxhMk6UErJg96hU5Z6DmAkub+F2iibQI5Z9rydKp3++fRr7lAEANuEkdFCxPd9dAaGWgIXwUYqKr8suMCw17sGCyAo7MKCLVATdjzBJl+MK+Z8pdnpsQEmsFgklYepGGVmzaIHgxyov3OvnqKxdp3ISCwLJpmTgaCOzalt31LgjXj81m8z7kN+mfuExc/RwCmwAiOqB9CxeHHZeDa0MIVzoWomMWoESm3QpBLaFibZc7NUcWOlXQ02avvKUDwc6iahAa02FeMAX5kE8Hjt/fKfrt0yHjy8gCo2eE8RDtu0CzQGcnB1dACEVeFEZv8iY4CCJ9eC9Mx9t8QrXgQU70eGDyAU+toowDVYmjgcBTxSaFLxxjNp8qxxh77inXMWar6XD4uhHrB1w9oH2HD8czE5YmBkL4GIlsIytlOEJ8Ia97xI7LZKMjOgzUQvFk3MNe/WrqMUTSR2rH2ErhqxDJ7FnnCfLi7hDJRgmTHT7oMvEIk0StrERfVJ7wnsoUFW/zlNZri/IOCMwVCAtgrVrIvZa7LHLTayyzQ+TYV6ugJoTOZKl8/gfJkiSUnJWTsSUGV2eMzyvhhpIKdNJuKVl+BoHnQpVIBnzlKDy5XrDr7TBxdJKlfZPCP0ib46/TZuug+TJT2I61djijSXFi17xRWUDuhDDChHCsfSWXJ1IFu94Al0rNtNml8NUCKsvNdBBXfraAkgbAloHCvqNUKtKDa68iH5BUORW+sBeo2uJo8gWEAVSsZRjAhWQe6dQ7+egIGgsoh8JXS+n03aTNA5tW21JaRQrWaqwVHWZSwnnywbUhVLhoZMmk2FF6UrWRSfbzMwgYC/r2Kgmt/l6vx1Os8b5lKW1f2LmpkmdMSXkECUHlIh2bKr3tcrk8b+VWjLhbVpjnoMPkg+tsqogty+JYOPMLKmwLz7O6INwxNO6cXQOeOo8aECo2S+QAmk2VGoXO7bVwy3TmucDe2+283V7euGt7rccdu4j+LBnGsUysrUUMwXxw3T3GJVo+3jKythaPfJ4kx+4QiSnxwNk0wF7yGi4E6PteA0KNQtdGa5e+3mjNStb3nhpKpasaXBeCft9jLbZ5W1JZ0pEsxRiq9nEt/RMFNQi459jYaD3ZFP7jLXc2BfKJdJ5mV4ALLYgNbm3L/V3uQmrPKlTIvZW2LXdMm8dg5YhKA1xN1SFUbRAcCv/Jy5dUK+9t+MUPeRRF7huIyZx/A/bjskqdly/VHL8NiyKzAudalvyDsQIe8VWNevki1k+MxIj7p7vvvHPh2vnMc418FwL3FVgS+7FVemKl+waEf/8a7kVJvjCDw4TLuUuFRZP19JXLMJy+ihMTZ1CvWHS4iNoiN73L/9PvLtdy7Lj+vm3R7y94ee0NVV+UsB8Om766Ab2QBXo1j6KPNIA+10HRh1tAn/Ch6GNOoM96UfSBN9Cn/ij6ow+gP/9B0R+CAUFAEQQgCCiCAAQBRRCAIKAIAhAEFEEAgoAiCEAQUAQBCAKKIABBQBEEIAgoggAEAUUQgCCgCAIQBBRBAIKAIghAEFAEAQgCiiAAQUARBCAIKIIABAFFEIAgoAgCEAQUQQCCgCIIQBBQBAEIAoogAEFAEQQgCCiCAAQBRRCAIKAIAhAEFEEAgoAiCEAQUAQBCAKKIABBQBEEIAgoggAEAdWHUf+v1+j/zp7F3RrtY/0AAAAASUVORK5CYII=" alt="Изображение 2"></a></div>
-            <div class="carousel-item"><a href="https://www.optimabank.kg"><img src="data:image/png;base64,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" alt="Изображение 3"></a></div>
-            <div class="carousel-item"><a href="https://demirbank.kg/ru"><img src="data:image/png;base64,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" alt="Изображение 4"></a></div>
-            <div class="carousel-item"><a href="https://obank.kg/ru"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIHBhUTEBIUFhUXFRgWFhYSFxYeFhUYHRYXHhcXGBYbHiggHCAnHhYZIjEiJiorLzEuIyAzODUsNzQvLisBCgoKDg0OGhAQGysdHyUtLys3Ky0tLS0rLS0tLS8wLS0rLS0uLy0tLS0tLS0tLTEtLSstLS0rLS0tLS0tLS0rNv/AABEIAMgAyAMBEQACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcEBQECCAP/xABKEAACAQIDBAIKEAMHBQAAAAAAAQIDEQQFEgYHEyExUQgUMjZBVGFxkZIWFyI1UnJzdIGhsbKzwdHSN0LCIzNiZMPh8BUkJ4Ki/8QAGwEBAAIDAQEAAAAAAAAAAAAAAAMEAQIGBQf/xAA1EQEAAQMBBQQIBAcAAAAAAAAAAQIDEQQFEhMhMTJRUnEGFTM0QWGBoRQWIkIjJCVikbHw/9oADAMBAAIRAxEAPwC8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFgx8cqv2+2lxeV7QunRrOMNEXZRg+bv1os2rcTDq9kbO09+xFdyMo77Nsw8Yfqw/aS8Onuet6l0nhPZtmHjD9WH7Rw6e49SaTwns2zDxh+rD9o4VJ6k0fhPZtmHjD9WH7RwqT1JpPCezbMPGH6sP2jhUnqTS+E9m2YeMP1YftMcKD1JpPCezbMPGH6sP2jhUxDFWxdJiZilcmS1pYjKKU5u8pU4NvrbimypVERLhb9O7dqpjvZ5qiAAAAAAAAAAAAAAAAHAFM7z++qXxIfmXLPR3OwMfho/wC+KJE0Pd5xyhkYPBVMdV00oSnLqgmzWasIL2ptWOdycN3HYfMJQv2u/Xhf7xrxaXnztvSZxvfZqMwyytllS1alKD8Gpcn5n0M2iaZ+K7Y1lq97OrLDM4wtNstm8XLA8bgy4enXqvG2m179N+g1346PPnaemi5w97m1JtOML1XZl6C2d94aHyUPuIoV9XzLVe2q85ZGZ5hSyrAyrV5qFOCvKTvZLr5czVAjPtoZP49T9Wp+0D6YfeTlOIqqMcdSu/haor0ySQEpp1FVgnFppq6afJrrTA7gAAAAAAAavPtoMNs7ho1MXVVKEpaU5KTTlZu3JPwJgffKczo5zl8a2Hmp0530zV7OzafTz6UwM0ABwYFM7z++qXxIfmXbPZdzsD3aGiyHKpZ1mkKMP5nzfwYrpZJVViHo6/VxprM1rjk8LsZk/gjFcuXOdSX5sp5m5Lhf4+vu98oxPelFVeWGenrc1q9Gm31knAetT6N3MZmrn5JLlma4XbDLpR06l0TpzS1R/wCeBojmJoeTf0+o0FyJnl81U7XZE8gzd0+bg1qpt+FdT8qLVFW9Dstma38VZ3p6x1WXh5W3a3/yj/DZX/e5K5H8/j+5TJbno76ex9HoPZ33hofJQ+4ihX1fM9V7arzlo97H8OsZ8l/XE1QKN3UbvqO3FLEOtWqU+E6aXDUeerXe9/igS3aDcTDC5TUnhcTUlUhFyUKsY6Z2V3FNdD6gOnY77SVamMq4GpJypqm6tO77hqUVKK8j1p260+sC9QNbjc+wmAq6K2JoU5fBqVYRfobAyqeMp1MNxI1IOHw1JafW6AO9CvCvG8JRkuuLTt6AOvbdPjaeJDV0adSvfqsBiY3PsJgK2itiaFOXwalWEZehu4GbQrRxFJShJSi+acWmn5mgKq7I/vSofOV+FUAkW5b+GmF81X8aoBMK2Lp0J2nUhF9UpJP6wPrCaqQTTTT6GuhgdjApnef31S+JD8y7Z7Ludge7Q2m6HDKeOrz8MYwivNJyb+4jW/OOSn6SXJiminzYW9TGSrbQKm37mEFZeV3bf2eg2sREc0/o9ZiLO98ZQsmdHGc80j2AxksJtTSs+U24SXWmv1SIrsRh4227UXNNVVPWEv3vUFLLqM7c1Nx+hxbf3URWHhej9yYuVUd8MzDz/wDF1/8ALSX1NGP3oLlP9Rx81QlqejuZ7H0eg9nfeGh8lD7iKFfV8z1XtqvOWj3sfw6xnyX9cTVAoXdnvD9gtOuu1+NxnB/3mjTo1/4XfugJNtBv0q5hlU6WHwioynFx4kqmtxTVm4rSudn0gbLsdMihFVsY6kHNrgqnGV5QjdScpx8F3FW8iYG3337e1Nn6McJhZaa1WOudRd1Tp3aSj1SlZ8/Al5QIdszuVxWd4BV8ViFQdRa1Fwc6jT53n7pWbv5WBqdstlcw3e5fUp8biYPE2hJxvock1JaoPuZe55PzgWF2N3evifnP+lACs9uatajvaxDwt+N2ylS091raio28vMCY09w1fE4RzrY6PHl7prhuUdT66jld+ewGm3XZxitjd4Cy+vJ6J1XRqU73iqj7icPO7c/Cn5gJv2R/elQ+cr8KoB12S2vo7Hbm8NWqWlNqqqVO/OpPjVP/AJXhf+wET2A2Tr7x9oJZhmTboa7u/LitdFOHVCPQ/R1tB6EpU1RpKMUlFJJJKySXQkgO5gUzvP76pfEh+Zds9l3OwPdoZW6rMFhs6nSk7cWHL40edvQ2YvRmMofSKxVVRFcR0Z+9TI5vERxUE3HSo1Lfy26JPyc7fQa2a46KmwNbTTmzVOO5XJZdbvUymm7PJZ4vOVXcXw6d7N9EpWaSXmvcgu1Oe29raKbXCpnnLab3cepcGgnzTdSXk8Eftka2Inqp+junmZquS+NHaXDR3f8Aa7qf2vClHTpl0tvw2sZ3J3stq9n3vWPEiP056/RXpPPR1NXZeg9nfeGh8lD7iKFfV8z1XtqvOWj3sfw6xnyX9cTVArHsesnw2a0MZ2zQpVdLo6eLCMtN1VvbUuXQgLZxew+W4vDShLA4ZKSteFKEZLyqUUmn5gKH3aVpbP73OBQm5U3WrYeX+OC16W/pimB998NqG9tSr/3X/by59HDVtX1qYHpCnNVIJxaaaumuhoCB78a1Olu5rqpa8pU400+lz4kXy/8AVSA0PY296+J+c/6cAIXiFq7ILn47H7EB6RA827U8t/8AH55hfsogTjsj+9Kh85X4VQCl8dl2Iw2UYLEYlSqYWSkqdpWSUas+JSv/ACyb1P6fIB6l2LzTC5ts5SngbKioqMYKydJpc6cl4Gv9+dwN6BwBTO8/vql8SH5lyz2Xc7A92hFsPXlhq6nB2lFpprpTRLMZjD2b1um5RNNXSVsbObe4fMMOoYpqnUtZuXcS8t30eZlWq1MTmHFa3Y16xVNVvnH+mx/6RldWXE0YdrpunDT6L2Nc1qkajWUxuZn/AAxs520weTYXRQcZyStGFK2ledrkl5jNNuqqeaXS7J1GoriquJiO+VS5lj55njZVarvKTu+pdSXkLURjlDttNpqLFEUUJ3hsBl72M1tUePwG+6WrXpduV+m5Dmrew5m5f1kavdjOM9yuieejrJ7H0eg9nfeGh8lD7iKFfV8z1XtqvOWm3oYeeJ2BxcKcZTk6dlGCbk3qj0JdJqgee9l8dnWykaiwdDEQ4mnXfDOV9N7d1B27pgbqvtftNmNF0tOK90rPh4XTK3kkqd15wJjuc3aVsmx/buOjpqJNUqTaco6laU525J2bVvKwN/vd3fvbDAxq4eyxNJNRvyVWHTw2/A780/K+sCq8p27zvYqgsLUpNqHuYwxVKbcV4FGSabXVza6gOM9wOd7d5dUxmLp1FSoxTp01TlFScpRjalS7qXTdy58l0gWJ2PmAq4DZvERrUqlNvEXSqQlFtcOHOzQERrZRiPb34va9bh9uRlxOHPRay56rWsB6DA897S5RiKm/KNWOHrOn23hpcRU56LJUrvXa1lYCZdkDgauP2Woxo0qlSSxKbVOMpNLh1OdkgM/d/s7DNN09HCY2lJKUailGacZxfGqOMkmrpq6aArzKMHmW6vbGUIUa2Iws2tXChKUalO/Kasvc1I9T+x3Av7B4mOMwsakL6ZJSWpNSV+uL5p+RgfcCmd5/fVL5OH5l2zH6Xc7AxGljKJEj3eoGM/B2UG4XtyVlfyhpEUb2OWXUzhJHdIYAcmMR3Bn4FWd2XoPZ33hofJU/uI8+vq+Y6n2tXnLYmqAAAAACwAAAAAAAAAAA4Ah+0uw0c9zR1pVpQbilZRT6PpJqLu7D2dFtirS29yKcoTtnshHZzCQnGq56p6bNJW5N/kTW7m86DZm1qtXXNNUYw0+zuRVc+xyp01ZLu5vogv18hvXXhd1+0KNJRmeqxsdu7p4mhCEKsoQguhRT1SfdTk782+XoK/Gcra25XbrmuYzMsP2rafjMvVX6meOs/mO54fue1ZDxifqr9TP4j5H5jueH7ntWQ8Zn6q/UfiPkfmO54fue1bT8Zn6i/U14+WJ9I7kxjd+6d5fhe0sFCmnfRGMb9dlb8iKZy565Xv1TPeyjVoAAAAAAAAAAAAAAAAAACJ7eZHUz6lQp0+X9pecn0RjpfP6yW3VuvU2Zq6dNNVUt1keT0skwKp0lZeF+GT62zWqrKnqdVXqK96psjRXAAAAAAAAAAAAAAAAAAAAAAAAABwAsGOjkMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//Z" alt="Изображение 5"></a></div>
-          </div>
-      
-          <button class="next-btn" aria-label="Следующий слайд">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <polyline points="9 6 15 12 9 18" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-    <h3 data-lang-key="footer-about-title">О FinGuru</h3>
-    <p data-lang-key="footer-about-text">FinGuru - это ваш персональный финансовый помощник, разработанный, чтобы помочь вам легко управлять своими деньгами, отслеживать расходы и достигать финансовых целей.</p>
-</div>
-                <div class="footer-links">
-                    <h3 data-lang-key="quick-links">Быстрые ссылки</h3>
-                    <ul>
-                        <li><a href="#hero" data-lang-key="nav-home">Главная</a></li>
-                        <li><a href="#features" data-lang-key="nav-features">Возможности</a></li>
-                        <li><a href="#how-it-works" data-lang-key="how-it-works">Как это работает</a></li>
-                        <li><a href="#testimonials" data-lang-key="testimonials">Отзывы</a></li>
-                        <li><a href="#cta" data-lang-key="cta">Начать</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contacts">
-                    <h3 data-lang-key="contacts">Контакты</h3>
-                    <ul>
-                        <li><a href="mailto:info@finguru.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@finguru.com</a></li>
-                        <li data-lang-key="phone">+7 (123) 456-78-90</li>
-                        <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 123 Finance St, City, Country</li>
-                    </ul>
-                    <div class="social-links">
-                        <a href="#" target="_blank" data-lang-key="social-telegram" aria-label="Telegram">
-                            <i class="fab fa-telegram-plane" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" target="_blank" data-lang-key="social-vk" aria-label="VK">
-                            <i class="fab fa-vk" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-newsletter">
-                    <h3 data-lang-key="subscribe">Подписка</h3>
-                    <p data-lang-key="subscribe-text">Получайте последние новости и обновления</p>
-                    <form class="subscribe-form" aria-label="Форма подписки">
-                        <input type="email" placeholder="Ваш email" required aria-label="Email для подписки">
-                        <button type="submit" data-lang-key="subscribe-btn" aria-label="Подписаться">Подписаться</button>
-                    </form>
-                    <p class="subscribe-message">Мы заботимся о ваших данных в нашей <a href="#" data-lang-key="privacy-policy">политике конфиденциальности</a>.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-lang-key="footer-copyright">© 2025 FinGuru. Все права защищены.</p>
-                <div class="footer-legal">
-                    <a href="/privacy" data-lang-key="privacy-policy">Политика конфиденциальности</a>
-                    <a href="/terms" data-lang-key="terms-of-use">Условия использования</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-      <script>
-        const translations = {
+
+
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fafb;
+    color: #222;
+    line-height: 1.6;
+  }
+  
+  main {
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+  section.bank {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.08);
+    margin-bottom: 30px;
+    padding: 20px 25px;
+    transition: box-shadow 0.3s ease;
+  }
+  section.bank:hover {
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.15);
+  }
+  h2 {
+    color: #004080;
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    border-bottom: 3px solid #0073e6;
+    padding-bottom: 6px;
+  }
+  h3 {
+    margin-top: 20px;
+    color: #0059b3;
+  }
+  p {
+    margin: 8px 0;
+  }
+  ul {
+    margin: 8px 0 15px 20px;
+  }
+  ul li {
+    margin-bottom: 6px;
+  }
+  a.bank-link {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  a.bank-link:hover {
+    text-decoration: underline;
+  }
+  footer {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+  }
+    </style>
+
+
+<script>
+    
+    const translations = {
   "en": {
+    // Header & Footer
     "nav-home": "Home",
     "nav-features": "Features",
     "nav-currency": "Currency Converter",
@@ -1941,9 +1994,78 @@ section {
     "subscribe-btn": "Subscribe",
     "privacy-policy": "Privacy Policy",
     "terms-of-use": "Terms of Use",
-    "footer-copyright": "© 2025 FinGuru. All rights reserved."
+    "footer-copyright": "© 2025 FinGuru. All rights reserved.",
+    // MBANK
+    "mbank-title": "MBANK",
+    "mbank-site": "Official MBANK website",
+    "mbank-consumer-title": "Consumer loans",
+    "mbank-consumer-amount": "Amount: up to 750,000 KGS",
+    "mbank-consumer-term": "Term: up to 60 months",
+    "mbank-consumer-rate": "Interest rate: from 21% per annum (first 36 months from 19%)",
+    "mbank-consumer-no-fee": "No fees, with guarantor",
+    "mbank-consumer-age": "Borrower age: 18 to 65 years",
+    "mbank-online-title": "Online loan",
+    "mbank-online-amount": "Amount: up to 500,000 KGS",
+    "mbank-online-term": "Term: from 3 to 36 months",
+    "mbank-online-rate": "Interest rate: from 22% per annum, promo 24%",
+    "mbank-online-no-collateral": "No collateral, documents or guarantors",
+    "mbank-online-approval": "Approval in 1 minute",
+    "mbank-mortgage-title": "Mortgage 'My Home'",
+    "mbank-mortgage-amount": "Amount: up to 8,000,000 KGS",
+    "mbank-mortgage-term": "Term: up to 120 months (10 years)",
+    "mbank-mortgage-rate": "Interest rate: first 3 years from 19%, then from 20%",
+    "mbank-mortgage-refinance": "Refinancing of non-problematic mortgage loans",
+    // Bakai Bank
+    "bakai-title": "Bakai Bank",
+    "bakai-site": "Official Bakai Bank website",
+    "bakai-consumer-title": "Consumer loans",
+    "bakai-consumer-amount": "Amount: up to 1,000,000 KGS",
+    "bakai-consumer-term": "Term: up to 60 months",
+    "bakai-consumer-rate": "Interest rate: from 20% per annum",
+    "bakai-consumer-no-collateral": "No collateral, with guarantor",
+    "bakai-auto-title": "Car loans",
+    "bakai-auto-amount": "Amount: up to 5,000,000 KGS",
+    "bakai-auto-initial": "Down payment: from 10%",
+    "bakai-auto-rate": "Interest rate: from 18% per annum",
+    // Optika Bank
+    "optika-title": "Optika Bank",
+    "optika-site": "Official Optika Bank website",
+    "optika-consumer-title": "Consumer loans",
+    "optika-consumer-amount": "Amount: up to 700,000 KGS",
+    "optika-consumer-term": "Term: up to 48 months",
+    "optika-consumer-rate": "Interest rate: from 22% per annum",
+    "optika-consumer-no-collateral": "No collateral, with guarantor",
+    "optika-business-title": "Business development loans",
+    "optika-business-amount": "Amount: up to 1,000,000 KGS",
+    "optika-business-term": "Term: up to 60 months",
+    "optika-business-rate": "Interest rate: from 20% per annum",
+    // Temir Bank
+    "temir-title": "Demir Bank",
+    "temir-site": "Official Demir Bank website",
+    "temir-consumer-title": "Consumer loans",
+    "temir-consumer-amount": "Amount: up to 800,000 KGS",
+    "temir-consumer-term": "Term: up to 60 months",
+    "temir-consumer-rate": "Interest rate: from 21% per annum",
+    "temir-consumer-no-collateral": "No collateral",
+    "temir-mortgage-title": "Mortgage loans",
+    "temir-mortgage-amount": "Amount: up to 7,000,000 KGS",
+    "temir-mortgage-term": "Term: up to 120 months",
+    "temir-mortgage-rate": "Interest rate: from 17% per annum",
+    // O! Bank
+    "obank-title": "O! Bank",
+    "obank-site": "Official O! Bank website",
+    "obank-consumer-title": "Consumer loans",
+    "obank-consumer-amount": "Amount: up to 600,000 KGS",
+    "obank-consumer-term": "Term: up to 48 months",
+    "obank-consumer-rate": "Interest rate: from 23% per annum",
+    "obank-consumer-no-collateral": "No collateral",
+    "obank-cash-title": "Cash loans",
+    "obank-cash-amount": "Amount: up to 500,000 KGS",
+    "obank-cash-term": "Term: up to 36 months",
+    "obank-cash-rate": "Interest rate: from 24% per annum"
   },
   "ru": {
+    // Header & Footer
     "nav-home": "Главная",
     "nav-features": "Возможности",
     "nav-currency": "Конвертер",
@@ -1977,9 +2099,78 @@ section {
     "subscribe-btn": "Подписаться",
     "privacy-policy": "Политика конфиденциальности",
     "terms-of-use": "Условия использования",
-    "footer-copyright": "© 2025 FinGuru. Все права защищены."
+    "footer-copyright": "© 2025 FinGuru. Все права защищены.",
+    // MBANK
+    "mbank-title": "MBANK",
+    "mbank-site": "Официальный сайт MBANK",
+    "mbank-consumer-title": "Потребительские кредиты",
+    "mbank-consumer-amount": "Сумма: до 750 000 сом",
+    "mbank-consumer-term": "Срок: до 60 месяцев",
+    "mbank-consumer-rate": "Процентная ставка: от 21% годовых (первые 36 месяцев от 19%)",
+    "mbank-consumer-no-fee": "Без комиссии, под поручительство",
+    "mbank-consumer-age": "Возраст заемщика: от 18 до 65 лет",
+    "mbank-online-title": "Онлайн-кредит",
+    "mbank-online-amount": "Сумма: до 500 000 сом",
+    "mbank-online-term": "Срок: от 3 до 36 месяцев",
+    "mbank-online-rate": "Процентная ставка: от 22% годовых, по акции 24%",
+    "mbank-online-no-collateral": "Без залога, документов и поручителей",
+    "mbank-online-approval": "Одобрение за 1 минуту",
+    "mbank-mortgage-title": "Ипотека \"Мой дом\"",
+    "mbank-mortgage-amount": "Сумма: до 8 000 000 сом",
+    "mbank-mortgage-term": "Срок: до 120 месяцев (10 лет)",
+    "mbank-mortgage-rate": "Процентная ставка: первые 3 года от 19%, далее от 20%",
+    "mbank-mortgage-refinance": "Рефинансирование не проблемных ипотечных кредитов",
+    // Бакай Банк
+    "bakai-title": "Бакай Банк",
+    "bakai-site": "Официальный сайт Бакай Банка",
+    "bakai-consumer-title": "Потребительские кредиты",
+    "bakai-consumer-amount": "Сумма: до 1 000 000 сом",
+    "bakai-consumer-term": "Срок: до 60 месяцев",
+    "bakai-consumer-rate": "Процентная ставка: от 20% годовых",
+    "bakai-consumer-no-collateral": "Без залога, с поручительством",
+    "bakai-auto-title": "Автокредиты",
+    "bakai-auto-amount": "Сумма: до 5 000 000 сом",
+    "bakai-auto-initial": "Первоначальный взнос: от 10%",
+    "bakai-auto-rate": "Процентная ставка: от 18% годовых",
+    // Оптика Банк
+    "optika-title": "Оптика Банк",
+    "optika-site": "Официальный сайт Оптика Банка",
+    "optika-consumer-title": "Потребительские кредиты",
+    "optika-consumer-amount": "Сумма: до 700 000 сом",
+    "optika-consumer-term": "Срок: до 48 месяцев",
+    "optika-consumer-rate": "Процентная ставка: от 22% годовых",
+    "optika-consumer-no-collateral": "Без залога, с поручительством",
+    "optika-business-title": "Кредиты на развитие бизнеса",
+    "optika-business-amount": "Сумма: до 1 000 000 сом",
+    "optika-business-term": "Срок: до 60 месяцев",
+    "optika-business-rate": "Процентная ставка: от 20% годовых",
+    // Демир Банк
+    "temir-title": "Демир Банк",
+    "temir-site": "Официальный сайт Темир Банка",
+    "temir-consumer-title": "Потребительские кредиты",
+    "temir-consumer-amount": "Сумма: до 800 000 сом",
+    "temir-consumer-term": "Срок: до 60 месяцев",
+    "temir-consumer-rate": "Процентная ставка: от 21% годовых",
+    "temir-consumer-no-collateral": "Без залога",
+    "temir-mortgage-title": "Ипотечные кредиты",
+    "temir-mortgage-amount": "Сумма: до 7 000 000 сом",
+    "temir-mortgage-term": "Срок: до 120 месяцев",
+    "temir-mortgage-rate": "Процентная ставка: от 17% годовых",
+    // О! Банк
+    "obank-title": "О! Банк",
+    "obank-site": "Официальный сайт О! Банка",
+    "obank-consumer-title": "Потребительские кредиты",
+    "obank-consumer-amount": "Сумма: до 600 000 сом",
+    "obank-consumer-term": "Срок: до 48 месяцев",
+    "obank-consumer-rate": "Процентная ставка: от 23% годовых",
+    "obank-consumer-no-collateral": "Без залога",
+    "obank-cash-title": "Кредиты наличными",
+    "obank-cash-amount": "Сумма: до 500 000 сом",
+    "obank-cash-term": "Срок: до 36 месяцев",
+    "obank-cash-rate": "Процентная ставка: от 24% годовых"
   },
   "ky": {
+    // Header & Footer
     "nav-home": "Башкы бет",
     "nav-features": "Мүмкүнчүлүктөр",
     "nav-currency": "Валюта конвертери",
@@ -2013,36 +2204,79 @@ section {
     "subscribe-btn": "Жазылуу",
     "privacy-policy": "Купуялык саясаты",
     "terms-of-use": "Колдонуу шарттары",
-    "footer-copyright": "© 2025 FinGuru. Бардык укуктар корголгон."
+    "footer-copyright": "© 2025 FinGuru. Бардык укуктар корголгон.",
+    // MBANK
+    "mbank-title": "MBANK",
+    "mbank-site": "MBANK расмий сайты",
+    "mbank-consumer-title": "Керектөөчүлүк кредиттер",
+    "mbank-consumer-amount": "Сумма: 750 000 сомго чейин",
+    "mbank-consumer-term": "Мөөнөтү: 60 айга чейин",
+    "mbank-consumer-rate": "Ставка: жылына 21% дан (алгачкы 36 айда 19% дан)",
+    "mbank-consumer-no-fee": "Комиссиясыз, кепилдик менен",
+    "mbank-consumer-age": "Карыз алуучунун жашы: 18ден 65 жашка чейин",
+    "mbank-online-title": "Онлайн-кредит",
+    "mbank-online-amount": "Сумма: 500 000 сомго чейин",
+    "mbank-online-term": "Мөөнөтү: 3төн 36 айга чейин",
+    "mbank-online-rate": "Ставка: жылына 22% дан, акция боюнча 24%",
+    "mbank-online-no-collateral": "Кепилсиз, документсиз жана кепилдиксиз",
+    "mbank-online-approval": "1 мүнөттө бекитилет",
+    "mbank-mortgage-title": "Ипотека \"Менин үйүм\"",
+    "mbank-mortgage-amount": "Сумма: 8 000 000 сомго чейин",
+    "mbank-mortgage-term": "Мөөнөтү: 120 айга чейин (10 жыл)",
+    "mbank-mortgage-rate": "Ставка: алгачкы 3 жылда 19% дан, андан кийин 20% дан",
+    "mbank-mortgage-refinance": "Маселе жок ипотекалык кредиттерди кайра каржылоо",
+    // Бакай Банк
+    "bakai-title": "Бакай Банк",
+    "bakai-site": "Бакай Банктын расмий сайты",
+    "bakai-consumer-title": "Керектөөчүлүк кредиттер",
+    "bakai-consumer-amount": "Сумма: 1 000 000 сомго чейин",
+    "bakai-consumer-term": "Мөөнөтү: 60 айга чейин",
+    "bakai-consumer-rate": "Ставка: жылына 20% дан",
+    "bakai-consumer-no-collateral": "Кепилсиз, кепилдик менен",
+    "bakai-auto-title": "Автокредиттер",
+    "bakai-auto-amount": "Сумма: 5 000 000 сомго чейин",
+    "bakai-auto-initial": "Баштапкы төлөм: 10% дан",
+    "bakai-auto-rate": "Ставка: жылына 18% дан",
+    // Оптика Банк
+    "optika-title": "Оптика Банк",
+    "optika-site": "Оптика Банктын расмий сайты",
+    "optika-consumer-title": "Керектөөчүлүк кредиттер",
+    "optika-consumer-amount": "Сумма: 700 000 сомго чейин",
+    "optika-consumer-term": "Мөөнөтү: 48 айга чейин",
+    "optika-consumer-rate": "Ставка: жылына 22% дан",
+    "optika-consumer-no-collateral": "Кепилсиз, кепилдик менен",
+    "optika-business-title": "Бизнес өнүктүрүү кредиттери",
+    "optika-business-amount": "Сумма: 1 000 000 сомго чейин",
+    "optika-business-term": "Мөөнөтү: 60 айга чейин",
+    "optika-business-rate": "Ставка: жылына 20% дан",
+    // Демир Банк
+    "temir-title": "Демир Банк",
+    "temir-site": "Темир Банктын расмий сайты",
+    "temir-consumer-title": "Керектөөчүлүк кредиттер",
+    "temir-consumer-amount": "Сумма: 800 000 сомго чейин",
+    "temir-consumer-term": "Мөөнөтү: 60 айга чейин",
+    "temir-consumer-rate": "Ставка: жылына 21% дан",
+    "temir-consumer-no-collateral": "Кепилсиз",
+    "temir-mortgage-title": "Ипотекалык кредиттер",
+    "temir-mortgage-amount": "Сумма: 7 000 000 сомго чейин",
+    "temir-mortgage-term": "Мөөнөтү: 120 айга чейин",
+    "temir-mortgage-rate": "Ставка: жылына 17% дан",
+    // О! Банк
+    "obank-title": "О! Банк",
+    "obank-site": "О! Банктын расмий сайты",
+    "obank-consumer-title": "Керектөөчүлүк кредиттер",
+    "obank-consumer-amount": "Сумма: 600 000 сомго чейин",
+    "obank-consumer-term": "Мөөнөтү: 48 айга чейин",
+    "obank-consumer-rate": "Ставка: жылына 23% дан",
+    "obank-consumer-no-collateral": "Кепилсиз",
+    "obank-cash-title": "Накталай кредиттер",
+    "obank-cash-amount": "Сумма: 500 000 сомго чейин",
+    "obank-cash-term": "Мөөнөтү: 36 айга чейин",
+    "obank-cash-rate": "Ставка: жылына 24% дан"
   }
 };
 
-        const carouselInner = document.querySelector('.carousel-inner');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const itemWidth = 320; // ширина карточки + margin (300 + 2*10)
-        const totalItems = document.querySelectorAll('.carousel-item').length;
-        const visibleItems = Math.floor(document.querySelector('.carousel-wrapper').offsetWidth / itemWidth);
-        let currentIndex = 0;
-      
-        function updateCarousel() {
-          if (currentIndex < 0) currentIndex = 0;
-          if (currentIndex > totalItems - visibleItems) currentIndex = totalItems - visibleItems;
-          const offset = -currentIndex * itemWidth;
-          carouselInner.style.transform = `translateX(${offset}px)`;
-        }
-      
-        prevBtn.addEventListener('click', () => {
-          currentIndex--;
-          updateCarousel();
-        });
-      
-        nextBtn.addEventListener('click', () => {
-          currentIndex++;
-          updateCarousel();
-        });
-
-        function setLanguage(lang) {
+function setLanguage(lang) {
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.getAttribute('data-lang-key');
                 if (translations[lang] && translations[lang][key]) {
@@ -2060,6 +2294,6 @@ section {
             });
             setLanguage('ru'); // Язык по умолчанию
         });
-      </script>
+</script>
 </body>
 </html>

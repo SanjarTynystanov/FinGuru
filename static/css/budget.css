@@ -1,312 +1,426 @@
-/* Общие стили */
-body {
-    font-family: 'Roboto', sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-    padding-bottom: 70px; /* Для кнопки справки */
-}
+/* static/css/theme.css */
 
+/* Light Theme Variables */
 body.light-theme {
-    background-color: #f9fafb;
-    color: #1f2937;
+    --bg-color: #f7f9fc; /* Soft, light background */
+    --bg-color-secondary: #ffffff; /* Pure white for content areas */
+    --text-color: #333d47;
+    --text-color-light: #6a7c8d;
+    --text-color-dark: #2c3e50;
+    --heading-color: #2c3e50;
+    --heading-color-secondary: #34495e;
+    --border-color: #e0e6ec; /* General border */
+    --card-border-color: #dee4ea; /* Card specific border */
+    --section-divider-color: #e5e9ec; /* Dividers */
+
+    --primary-color: #007bff; /* Bright, classic blue */
+    --primary-color-dark: #0056b3;
+    --primary-color-light: #6aa8ff;
+
+    --success-color: #28a745; /* Standard green */
+    --success-color-dark: #218838;
+
+    --warning-color: #ffc107; /* Standard yellow */
+    --warning-color-dark: #e0a800;
+
+    --info-color: #17a2b8; /* Standard cyan */
+    --info-color-dark: #138496;
+
+    --hero-bg: #eaf1f7; /* Light blue-grey hero background */
+    --hero-text-color: var(--text-color);
+    --hero-title-color: var(--heading-color);
+
+    --card-bg: #ffffff;
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08); /* Very subtle shadow */
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.1); /* Medium shadow */
+    --shadow-hover: 0 6px 14px rgba(0, 0, 0, 0.15); /* Hover shadow */
+
+    --input-bg: #ffffff;
+    --input-text-color: var(--text-color-dark);
+    --input-border-color: #ced4da;
+    --input-placeholder-color: #a0aab8;
+
+    --btn-primary-bg: var(--primary-color);
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: #e9ecef;
+    --btn-secondary-text: #495057;
+    --btn-secondary-border: #ced4da;
+
+    --balance-bg: #eaf1f7;
+    --balance-border: #c3d9f7;
+
+    --progress-bar-bg: #e9ecef;
+    --progress-fill-color: var(--success-color);
+    --progress-text-color: #ffffff;
+
+    --tip-bg: #f8fafd;
+    --forecast-bg: #fffbe6;
+    --forecast-border: #ffe89e;
 }
 
+/* Dark Theme Variables */
 body.dark-theme {
-    background-color: #111827;
-    color: #d1d5db;
+    --bg-color: #212c37;
+    --bg-color-secondary: #2c3a47;
+    --text-color: #e0e7f0;
+    --text-color-light: #a0b2c3;
+    --text-color-dark: #f0f7ff;
+    --heading-color: #f0f7ff;
+    --heading-color-secondary: #e0e7f0;
+    --border-color: #3c4a5c;
+    --card-border-color: #435467;
+    --section-divider-color: #3f5267;
+
+    --primary-color: #5d9cec;
+    --primary-color-dark: #4a8cdb;
+    --primary-color-light: #8dcafb;
+
+    --success-color: #2ecc71;
+    --success-color-dark: #27ae60;
+
+    --warning-color: #f1c40f;
+    --warning-color-dark: #d6ac0c;
+
+    --info-color: #3498db;
+    --info-color-dark: #2980b9;
+
+    --hero-bg: #2c3a47;
+    --hero-text-color: var(--text-color);
+    --hero-title-color: var(--heading-color);
+
+    --card-bg: #344759;
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 6px 14px rgba(0, 0, 0, 0.4);
+
+    --input-bg: #4a657e;
+    --input-text-color: var(--text-color-dark);
+    --input-border-color: #5b7a95;
+    --input-placeholder-color: #a0b2c3;
+
+    --btn-primary-bg: var(--primary-color);
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: #4a657e;
+    --btn-secondary-text: #e0e7f0;
+    --btn-secondary-border: #5b7a95;
+
+    --balance-bg: #3f5267;
+    --balance-border: #5b7a95;
+
+    --progress-bar-bg: #4a657e;
+    --progress-fill-color: var(--success-color);
+    --progress-text-color: #ffffff;
+
+    --tip-bg: #3f5267;
+    --forecast-bg: #4a657e;
+    --forecast-border: #5b7a95;
 }
 
-/* Контейнер и карточки */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+/* Global transitions for smooth theme change */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* static/css/budget-classic.css */
+
+/* Base Styles (Shared where possible, but customized for classic feel) */
+.budget-hero {
+    background-color: var(--hero-bg);
+    color: var(--hero-text-color);
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.budget-hero h1 {
+    font-size: 3.2em;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--hero-title-color);
+}
+
+.budget-hero .subtitle {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.budget-info {
+    background-color: var(--card-bg);
+    border-radius: 8px; /* Slightly less rounded */
+    padding: 25px;
+    box-shadow: var(--shadow-subtle);
+    max-width: 800px;
+    margin: 30px auto 0;
+    font-size: 1em;
+    color: var(--text-color);
+    line-height: 1.6;
+    border: 1px solid var(--card-border-color);
+}
+
+/* Dashboard Layout */
+.budget-dashboard {
+    padding: 60px 0;
+    background-color: var(--bg-color-secondary);
+}
+
+.budget-dashboard .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .budget-dashboard .container {
+        grid-template-columns: 1.2fr 1fr; /* Inputs slightly wider */
+    }
+}
+
+/* Card Styling */
 .card {
-    background: var(--card-bg, #ffffff);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--card-border, #e5e7eb);
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    padding: 30px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-body.dark-theme .card {
-    --card-bg: #1f2937;
-    --card-border: #374151;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border-color);
 }
 
 .card:hover {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
-body.dark-theme .card:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+.card h3, .card h4 {
+    color: var(--heading-color);
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--section-divider-color); /* Light border */
+    padding-bottom: 15px;
 }
 
-/* Стили для инпутов */
+/* Input Group Styling */
 .input-group {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-weight: 500;
-    color: var(--label-color, #4b5563);
+    color: var(--text-color-dark);
 }
 
-body.dark-theme .input-group label {
-    --label-color: #9ca3af;
-}
-
-.input-group input,
+.input-group input[type="number"],
+.input-group input[type="text"],
 .input-group select {
     width: 100%;
-    max-width: 350px;
-    padding: 10px 12px;
-    border: 1px solid var(--input-border, #d1d5db);
-    border-radius: 8px;
-    font-size: 14px;
-    background-color: var(--input-bg, #ffffff);
-    color: var(--input-text, #1f2937);
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-body.dark-theme .input-group input,
-body.dark-theme .input-group select {
-    --input-bg: #374151;
-    --input-border: #4b5563;
-    --input-text: #d1d5db;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--input-text-color);
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 }
 
 .input-group input:focus,
 .input-group select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Standard focus ring */
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-.input-group .is-invalid {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-}
-
-.input-group .btn {
-    margin-top: 12px;
-}
-
-/* Стили для кнопок */
+/* Button Styling */
 .btn {
-    width: 300px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 15px;
+    width: 100%;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+    transform: translateY(-1px);
+    opacity: 0.9;
 }
 
 .btn-primary {
-    background-color: #3b82f6;
-    color: #ffffff;
-}
-
-body.dark-theme .btn-primary {
-    background-color: #60a5fa;
-}
-
-.btn-primary:hover {
-    background-color: #2563eb;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
 }
 
 .btn-secondary {
-    background-color: #6b7280;
-    color: #ffffff;
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: 1px solid var(--btn-secondary-border);
 }
 
-body.dark-theme .btn-secondary {
-    background-color: #9ca3af;
+/* Specific Section Styling */
+.expenses-section, .bank-connection, .goal-tips {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--section-divider-color);
 }
 
-.btn-secondary:hover {
-    background-color: #4b5563;
+#balanceResult {
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-top: 30px;
+    text-align: center;
+    color: var(--primary-color);
+    padding: 12px 18px;
+    background-color: var(--balance-bg);
+    border-radius: 8px;
+    border: 1px solid var(--balance-border);
+    display: inline-block;
+    min-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.btn-success {
-    background-color: #22c55e;
-    color: #ffffff;
-}
-
-body.dark-theme .btn-success {
-    background-color: #34d399;
-}
-
-.btn-success:hover {
-    background-color: #16a34a;
-}
-
-.btn-warning {
-    background-color: #f59e0b;
-    color: #ffffff;
-}
-
-body.dark-theme .btn-warning {
-    background-color: #fbbf24;
-}
-
-.btn-warning:hover {
-    background-color: #d97706;
-}
-
-.btn-info {
-    background-color: #06b6d4;
-    color: #ffffff;
-}
-
-body.dark-theme .btn-info {
-    background-color: #22d3ee;
-}
-
-.btn-info:hover {
-    background-color: #0891b2;
-}
-
-/* Стили для кнопки справки */
-#helpBtn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 50%;
-    background-color: #06b6d4;
-    border: none;
-    font-size: 16px;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s, box-shadow 0.2s;
-}
-
-body.dark-theme #helpBtn {
-    background-color: #22d3ee;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-#helpBtn:hover {
-    background-color: #0891b2;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
-}
-
-#helpBtn i {
-    margin: 0;
-}
-
-/* Стили для графиков */
-.chart-wrapper {
-  width: 100%;
-  max-width: 400px;
-  height: 400px;
-  margin: 0 auto;
-  position: relative;
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-}
-
-
-body.dark-theme #budget-total-chart {
-    --chart-bg: #1f2937;
-}
-
-.budget-chart canvas {
-    border-radius: 12px;
-}
-
-/* Стили для прогресс-бара */
+/* Goal Section Styling */
 .progress-bar {
     width: 100%;
-    height: 8px;
-    background-color: #e5e7eb;
-    border-radius: 4px;
-    margin: 12px 0;
+    background-color: var(--progress-bar-bg);
+    border-radius: 5px;
+    height: 25px;
+    margin-top: 20px;
     overflow: hidden;
-}
-
-body.dark-theme .progress-bar {
-    background-color: #4b5563;
 }
 
 #goalProgressBar {
     height: 100%;
-    border-radius: 4px;
-    transition: width 0.3s ease;
-    background-color: #3b82f6;
+    background-color: var(--progress-fill-color);
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--progress-text-color);
+    font-weight: 500;
+    font-size: 0.9em;
 }
 
-.bg-success {
-    background-color: #22c55e !important;
+#goalProgressText {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: var(--text-color);
 }
 
-.bg-danger {
-    background-color: #ef4444 !important;
+.goal-tips ul {
+    list-style: disc; /* Classic bullet points */
+    padding-left: 20px;
 }
 
-/* Адаптивность */
+.goal-tips li {
+    background-color: var(--tip-bg);
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    color: var(--text-color);
+    line-height: 1.4;
+    border-left: 4px solid var(--primary-color-light);
+}
+
+/* Chart Styling */
+.chart-wrapper {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid var(--card-border-color);
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Help Button and Modal */
+#helpBtn {
+    background-color: var(--info-color);
+    color: #ffffff;
+    border-radius: 50%; /* Round button */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    position: fixed; /* Keep it in place */
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#helpBtn:hover {
+    background-color: var(--info-color-dark);
+    transform: scale(1.05);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 10px;
+    border: 1px solid var(--card-border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--section-divider-color);
+    padding: 15px 25px;
+}
+
+.modal-header .modal-title {
+    color: var(--heading-color);
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.modal-body {
+    padding: 20px 25px;
+    line-height: 1.6;
+}
+
+.modal-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+/* Responsive Adjustments (Classic) */
 @media (max-width: 768px) {
-    .input-group input,
-    .input-group select {
-        max-width: 100%;
-    }
-
-    .card {
-        padding: 16px;
-    }
-
-    .budget-chart {
-        height: 200px;
-    }
-
-    #helpBtn {
-        width: 44px;
-        height: 44px;
-        font-size: 15px;
-    }
+    .budget-hero { padding: 40px 0; }
+    .budget-hero h1 { font-size: 2.5em; }
+    .budget-hero .subtitle { font-size: 1.1em; margin-bottom: 20px; }
+    .budget-info { padding: 20px; margin: 20px auto 0; font-size: 0.95em; }
+    .budget-dashboard { padding: 40px 0; }
+    .card { padding: 25px; }
+    .card h3, .card h4 { font-size: 1.4em; margin-bottom: 20px; padding-bottom: 12px; }
+    .input-group { margin-bottom: 15px; }
+    .input-group input, .input-group select { padding: 10px 12px; font-size: 0.95em; }
+    .btn { padding: 9px 18px; font-size: 0.95em; margin-top: 10px; }
+    #balanceResult { font-size: 1.4em; margin-top: 20px; padding: 10px 15px; min-width: unset; }
+    .progress-bar { height: 20px; margin-top: 15px; }
+    #goalProgressText { font-size: 1em; }
+    .goal-tips li { padding: 8px 12px; margin-bottom: 6px; }
+    .chart-wrapper { min-height: 280px; padding: 15px; }
+    #helpBtn { width: 45px; height: 45px; font-size: 1.3em; bottom: 15px; right: 15px; }
+    .modal-header .modal-title { font-size: 1.3em; }
+    .modal-body { padding: 15px 20px; font-size: 0.95em; }
 }
 
-@media (max-width: 480px) {
-    .btn {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .input-group {
-        margin-bottom: 10px;
-    }
-
-    .card {
-        padding: 12px;
-    }
-
-    .budget-chart {
-        height: 180px;
-    }
-}
